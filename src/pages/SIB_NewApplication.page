@@ -1,0 +1,22 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" controller="SIB_NewApplicationController" action="{!checkLoggedInStatus}">
+	<apex:composition template="SIB_Template">
+		<apex:define name="body">
+			<apex:form id="form">
+				<apex:pageBlock >
+					<apex:commandLink action="{!back}" value="< Back"/>
+					<apex:pageBlockSection columns="1">
+						<h1 class="heading-xlarge">What theme are you applying for?</h1>
+						<br/>
+						<apex:selectRadio layout="pagedirection" id="themeSelected" value="{!selectedTheme}">
+							<apex:actionSupport event="onchange" reRender="form"/>
+							<apex:selectOptions value="{!themes}"/>
+						</apex:selectRadio>
+					</apex:pageBlockSection>
+					<apex:pageBlockButtons id="buttons" location="bottom">
+						<apex:commandButton styleClass="button" rendered="{!selectedtheme != ''}" reRender="buttons" action="{!startApplication}" value="Start Application"/>
+					</apex:pageBlockButtons>
+				</apex:pageBlock>
+			</apex:form>
+		</apex:define>
+	</apex:composition>
+</apex:page>

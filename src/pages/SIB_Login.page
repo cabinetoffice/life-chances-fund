@@ -1,0 +1,12 @@
+<apex:page showHeader="false" standardStylesheets="false">
+	<apex:composition template="SIB_Template">
+		<apex:define name="body">
+			<br/>
+			<h1 class="heading-xlarge">Sign In</h1>
+			<apex:panelGrid columns="3" style="margin-top:1em;">
+				<c:SiteLogin id="siteLogin"/>
+			</apex:panelGrid>
+			<br/>
+		</apex:define>
+	</apex:composition>
+</apex:page>

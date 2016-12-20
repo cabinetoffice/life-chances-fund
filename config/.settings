@@ -1,0 +1,19 @@
+{
+    "projectName": "Cabinet Office - Dev",
+    "username": "westbrookadmin@cabinetoffice.co.uk.dev",
+    "id": "7e9e4920-91f0-11e6-a43a-0577bcbf66ea",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://cs80.salesforce.com",
+    "workspace": "C:\\workspaces\\MavensMate",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "Community",
+        "CustomObject",
+        "Settings"
+    ]
+}

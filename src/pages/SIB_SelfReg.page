@@ -1,0 +1,69 @@
+<apex:page id="communitiesSelfRegPage" standardStylesheets="false" showHeader="false" controller="SIB_SelfRegController" title="{!$Label.site.user_registration}">
+	<apex:composition template="SIB_Template">
+		<apex:define name="body">
+			<apex:form id="form" forceSSL="true">
+				<apex:pageMessages id="error"/>
+				<apex:pageBlock mode="mainDetail">
+					<apex:outputPanel >
+						<apex:commandLink value="Back" immediate="true" action="{!previousPage}" reRender="form"/>
+					</apex:outputPanel>
+					<apex:pageBlockSection columns="1">
+						<br/>
+						<apex:pageBlockSection columns="1" rendered="{!pageNumber == 1}">
+							<h1 class="heading-xlarge"> Your Details </h1>
+							<apex:outputLabel value="First name" for="firstName"/>
+							<apex:inputText id="firstName" value="{!firstName}"/>
+							<apex:outputLabel value="Last name" for="lastName"/>
+							<apex:inputText id="lastName" value="{!lastName}"/>
+							<apex:outputLabel value="Email address" for="email"/>
+							<apex:inputText id="email" value="{!email}"/>
+							<apex:outputLabel value="Organisation name" for="orgName"/>
+							<apex:inputText id="orgName" value="{!organisationName}"/>
+						</apex:pageBlockSection>
+
+						<apex:pageBlockSection columns="1" rendered="{!pageNumber == 2}">
+							<h1 class="heading-xlarge"> What type of organisation is it? </h1>
+							<apex:selectRadio layout="pagedirection" value="{!typeSelected}">
+								<apex:selectOptions value="{!types}">
+									<apex:actionSupport event="onclick" reRender="form"/>
+								</apex:selectOptions>
+						 	</apex:selectRadio>
+						 	<apex:outputPanel rendered="{!typeSelected == 'Other'}">
+								<apex:outputLabel value="If you chose other, please explain" for="orgTypeOther"/>
+								<apex:inputText id="orgTypeOther" value="{!orgTypeOther}"/>
+							</apex:outputPanel>
+						</apex:pageBlockSection>
+
+						<apex:pageBlockSection columns="1" rendered="{!pageNumber == 3}">
+							<h1 class="heading-xlarge"> Where is your organisation based?  </h1>
+						</apex:pageBlockSection>
+						<apex:pageBlockSection columns="2" rendered="{!pageNumber == 3}">
+							<apex:repeat value="{!regionsCBW}" var="region" >
+								<apex:inputCheckbox value="{!region.isSelected}"/>
+                                <apex:outputText value="{!region.checkboxName}"/> 
+                            </apex:repeat>
+					 	</apex:pageBlockSection>
+
+						<apex:pageBlockSection columns="1" rendered="{!pageNumber == 4}">
+							<h1 class="heading-xlarge"> Which themes are you interested in? </h1>
+							Please select all those that apply
+						</apex:pageBlockSection>
+						<apex:pageBlockSection columns="2" rendered="{!pageNumber == 4}">
+							<apex:repeat value="{!themesCBW}" var="theme" >
+								<apex:inputCheckbox value="{!theme.isSelected}"/>
+                                <apex:outputText value="{!theme.checkboxName}"/> 
+                            </apex:repeat>
+					 	</apex:pageBlockSection>
+
+					 	<apex:pageBlockSection >
+					 		<apex:commandButton rendered="{!pageNumber == 4}" styleClass="button" action="{!registerUser}" value="Submit" id="submit"/>
+							<apex:commandButton rendered="{!pageNumber != 4}" styleClass="button" action="{!nextPage}" value="Continue" id="continue" reRender="form"/>
+					 	</apex:pageBlockSection>
+					</apex:pageBlockSection>
+				</apex:pageBlock> 
+				<br/>
+			</apex:form>
+			<br/>
+		</apex:define>
+	</apex:composition>
+</apex:page>

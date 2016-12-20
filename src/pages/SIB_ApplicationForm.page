@@ -1,0 +1,514 @@
+<apex:page controller="SIB_ApplicationFormExtension" standardStylesheets="false" action="{!initialiseData}" showHeader="false" sidebar="false">
+	<apex:composition template="SIB_Template">
+		<apex:define name="body">
+			<apex:form id="form">
+				<apex:messages styleClass="errorMessages" id="pms"/>
+				<apex:pageBlock id="contentBlock">
+				<div class="row" id="mainContentRow">
+					<apex:outputPanel >
+						<apex:commandLink value="Back" immediate="true" action="{!previous}" rendered="{!formSection != ''}" reRender="form"/>
+						<apex:commandLink value="Back" onclick="returnToHomePageConfirm();return false;" rendered="{!formSection == '' || formSection == null}"/>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{!!currApp.Application_Window_Template__r.Application_Window__r.Is_Live__c}">
+						<apex:outputText rendered="false" value="{!$Label.SIB_Theme_Not_Open}"/><br/>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{!formSection == ''}">
+						<h1 class="heading-xlarge">Expression of interest application</h1>
+						<p class="lede"> Complete the sections below </p>
+						<apex:variable value="" var="formName"/>
+						<apex:repeat value="{!sectionWrappers}" var="formSectionVar">
+							<apex:variable var="formName" value="'{!formSectionVar}'"/>
+							<p style="border-top: solid ; border-top-width: 1px; padding-top:10px;">
+								<apex:outputLink styleClass="sectionlink" onclick="setFormSection({!formName});return false;">
+									{!formSectionVar}
+								</apex:outputLink>
+								<apex:outputPanel rendered="{!sectionWrappers[formSectionVar].status == 'COMPLETED' || sectionWrappers[formSectionVar].status == 'IN PROGRESS'}" style="position: absolute; right:0px; padding-right: 20%;">
+									<apex:outputText rendered="{!sectionWrappers[formSectionVar].status != null}" styleClass="status" value="{!sectionWrappers[formSectionVar].status}"/>
+								</apex:outputPanel>
+							</p>
+						</apex:repeat>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{!formSection != '' && questionNumber == null && additionalSectionToShow == ''}">
+						<h1 class="heading-xlarge"> 
+                    		<apex:outputText value="{!formSection}"/>
+                		</h1>
+                        <apex:outputText escape="false" value="{!sectionWrappers[formSection].helpText}" />
+					</apex:outputPanel>
+                    <div class="row" id="mainContentQuestions">
+                        <div class="col-md-12">
+                            <apex:pageBlock rendered="{!formSection != '' && questionNumber != null}">
+                            	<apex:variable var="questionIndex" value="{!questionNumber + 1}"/>
+                            	<apex:outputText style="color:LightGrey" value="Question {!questionIndex} of {!qws.size}"></apex:outputText>
+								<div class="field">
+									<h1 class="heading-xlarge">{!qw.question}</h1>
+									{!qw.aqt.Application_Question__r.Subtext__c}
+									<br/>
+									<apex:outputPanel id="questionHelp" rendered="{!qw.aqt.Application_Question__r.Help_Text__c != ''}">
+	                                    <apex:commandLink styleClass="sectionlink" onclick="toggleQuestionHelpText();return false;">
+	                                    	{!IF(displayQuestionHelpText == false,'Show Guidance', 'Hide Guidance')}
+                                    	</apex:commandLink>
+                                    	<apex:outputPanel >
+		                                	<br/>
+	                                    	<apex:outputText rendered="{!displayQuestionHelpText == true}" value="{!qw.aqt.Application_Question__r.Help_Text__c}"/>
+										</apex:outputPanel>
+                                    	<br/>
+                                	</apex:outputPanel>
+                                    
+
+                                    <div class="longText">
+                                		<apex:selectList size="1" disabled="{!disable}" onchange="upsertAnswer('{!qw.aqt.Id}');" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Single Picklist') && (qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == '' || qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c != 'Single Picklist' || (qw.applicationAnswer[qw.aqt.Application_Question__r.Field_to_Check_for_Rendering__c] == qw.aqt.Application_Question__r.Answer_To_Rerender_On__c && qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == 'Single Picklist'))}" value="{!qw.applicationAnswer.Picklist_Answer__c}">
+	                                        <apex:selectOptions value="{!qw.selectOptions}"/>
+	                                    </apex:selectList>
+	                                    <br/>
+	                                    <apex:repeat value="{!qw.cbws}" var="cbw"  rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Checkboxes') && (qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == '' || qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c != 'Checkboxes' ||
+	                                    (qw.applicationAnswer[qw.aqt.Application_Question__r.Field_to_Check_for_Rendering__c] == qw.aqt.Application_Question__r.Answer_To_Rerender_On__c && qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == 'Checkboxes'))}">
+	                                        <apex:inputCheckbox onchange="upsertAnswer('{!qw.aqt.Id}');" disabled="{!disable}" value="{!cbw.isSelected}"/>
+	                                        <apex:outputText value="{!cbw.checkboxName}"/> 
+	                                        <br/>
+	                                    </apex:repeat>
+
+
+	                                    <apex:inputCheckbox onchange="upsertAnswer('{!qw.aqt.Id}');" disabled="{!disable}" value="{!qw.applicationAnswer.Checkbox_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Single Checkbox')}"/>
+
+
+	                                    <apex:selectList disabled="{!disable}" multiselect="true"  rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Multi-Select Picklist')}" id="multi-picklist-answer" value="{!qw.applicationAnswer.Multi_Picklist_Answers__c}">
+	                                        <apex:selectOptions value="{!qw.selectOptions}"/>
+	                                    </apex:selectList>
+
+
+	                                    <apex:selectRadio style="background-color: LightGrey;" onchange="upsertAnswer('{!qw.aqt.Id}');return false;" layout="pagedirection" disabled="{!disable}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Radio Select')}" id="radio-answer" value="{!qw.applicationAnswer.Picklist_Answer__c}">
+	                                        <apex:selectOptions value="{!qw.selectOptions}"/>
+	                                    	<br/>
+	                                    </apex:selectRadio>
+
+	                                    <apex:inputText maxlength="255" disabled="{!disable}" style="width:400px;" value="{!qw.applicationAnswer.Short_Text_Answer__c}"  rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Short Text') && (qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == '' || (qw.applicationAnswer[qw.aqt.Application_Question__r.Field_to_Check_for_Rendering__c] == qw.aqt.Application_Question__r.Answer_To_Rerender_On__c && qw.aqt.Application_Question__r.Field_to_Conditionally_Render__c == 'Short Text'))}"/>
+
+
+	                                    <apex:inputText disabled="{!disable}" style="width:400px;" value="{!qw.applicationAnswer.Email_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Email')}"/>
+
+
+	                                    <apex:inputField style="width:50px;" value="{!qw.applicationAnswer.Date_Day_Answer__c}"  rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Date')}"/>
+
+
+	                                    <apex:inputField style="width:50px;" value="{!qw.applicationAnswer.Date_Month_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Date')}"/>
+
+
+	                                    <apex:inputField style="width:100px;" value="{!qw.applicationAnswer.Date_Year_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Date')}"/>
+
+
+	                                    <apex:outputPanel rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Currency')}">
+	                                    	<br/>
+	                                    	£<apex:inputField style="width:400px;" value="{!qw.applicationAnswer.Currency_Answer__c}" />
+                                    	</apex:outputPanel>
+
+
+	                                	<apex:inputTextarea disabled="{!disable}" style="height:129px;width:729px;" value="{!qw.applicationAnswer.Text_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Long Text')}"/>
+
+
+                                    	<apex:inputText disabled="{!disable}" value="{!qw.applicationAnswer.Percent_Answer__c}" rendered="{!CONTAINS(qw.aqt.Application_Question__r.Question_Type__c, 'Percent')}"/>
+
+
+                                	</div>
+                                	<apex:outputText styleClass="charCount" rendered="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c != ''}" value="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c}"/>
+								</div>
+								<br/>
+								<br/>
+								</apex:pageBlock>
+
+								<!-- Start of commissioner section !-->
+								<apex:pageBlock id="commissioners" rendered="{!additionalSectionToShow == 'Commissioner' && commissionerToCreate == null}">
+									<h1 class="heading-xlarge"><apex:outputText value="{!$Label.SIB_Commissioner_Heading}" escape="false"/></h1>
+									<apex:variable value="0" var="commissionerIndex"/>
+									<br/>
+									<apex:repeat value="{!applicationCommissioners}" var="ac">
+										<b> {!ac.Account.Name} </b>
+										<table class="tableRowHead">
+											<tr class="tableRowHead"> 
+												<td class="tableLeft"> Lead Contact </td>
+												<td class="tableCenter"> {!ac.FirstName} &nbsp; {!ac.LastName} </td>
+												<td> <apex:outputLink onclick="setCommissioner({!commissionerIndex});return false;"> Change </apex:outputLink> </td>
+											</tr>
+											<tr>
+											</tr>
+											<tr>
+												<td class="tableLeft"> Email </td>
+												<td class="tableCenter"> {!ac.Email} </td>
+												<td><apex:outputLink onclick="deleteCommissioner({!commissionerIndex});return false;"> Delete </apex:outputLink></td>
+											</tr>
+											<tr>
+												<td class="tableLeft"> Telephone </td>
+												<td class="tableCenter"> {!ac.Phone} </td>
+											</tr>
+											<tr>
+												<td class="tableLeft"> Region </td>
+												<td class="tableCenter"> {!ac.Account.Organisation_Region__c} </td>
+											</tr>
+										</table>
+									<br/>
+									<br/>
+									<apex:variable var="commissionerIndex" value="{!VALUE(commissionerIndex) + 1}"/>
+								</apex:repeat>
+							</apex:pageBlock>
+
+							<apex:pageBlock id="createCommissioner" rendered="{!additionalSectionToShow == 'Commissioner' && commissionerToCreate != null}">
+								<h1 class="heading-xlarge">Fill in the commissioners details</h1>
+                            	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 1}">
+	                                <apex:outputLabel value="Name of the commissioners organisation" />
+	                                <apex:pageBlockSectionItem>
+	                            		<apex:inputText value="{!organisationToCreate['Name']}"/>
+                            		</apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem/>
+	                                <apex:outputLabel value="First name of the lead contact for the commissioner"/>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputText value="{!commissionerToCreate['FirstName']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+	                                <apex:outputLabel value="Last name of the lead contact for the commissioner"/>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputText value="{!commissionerToCreate['LastName']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
+                            	</apex:pageBlockSection>
+                            	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 2}">
+	                            	<apex:outputLabel value="Email address" />
+	                            	<apex:pageBlockSectionItem>
+	                            		<apex:inputText value="{!commissionerToCreate['Email']}"/>
+                            		</apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem/>
+	                                <apex:outputLabel value="Phone number" />
+	                            	<apex:pageBlockSectionItem>
+	                            		<apex:inputText value="{!commissionerToCreate['Phone']}"/>
+                            		</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
+                                </apex:pageBlockSection>
+                                <apex:pageBlockSection columns="1" rendered="{!pageNumber == 3}">
+                                	<apex:outputLabel value="What region is the commissioner in?" />
+	                            	<apex:pageBlockSectionItem>
+	                            		<apex:repeat value="{!regionWrapper}" var="cbw">
+	                                        <apex:inputCheckbox disabled="{!disable}" value="{!cbw.isSelected}"/>
+	                                        <apex:outputText value="{!cbw.checkboxName}"/> 
+	                                        <br/>
+	                                    </apex:repeat>
+                            		</apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem/>
+	                                <apex:commandButton styleClass="button" value="Insert Commissioner" onclick="insertCommissioner();return false;"/>
+                                </apex:pageBlockSection>
+                            </apex:pageBlock>
+							<!-- End of commissioners section !-->
+
+							<!-- Start of outcomes section !-->
+							<apex:pageBlock id="outcomes" rendered="{!additionalSectionToShow == 'Outcomes' && outcomeToCreate == null}">
+								<h1 class="heading-xlarge"><apex:outputText value="{!$Label.SIB_Outcomes_Heading}" escape="false"/></h1>
+								<apex:variable value="0" var="outcomeIndex"/>
+								<br/>
+								<apex:repeat value="{!applicationOutcomes}" var="ao">
+									<b> {!ao.Name} </b>
+									<table class="tableRowHead">
+										<tr class="tableRowHead"> 
+											<td class="tableLeft"> Outcome Summary </td>
+											<td class="tableCenter"> </td>
+											<td> <apex:outputLink onclick="setOutcome({!outcomeIndex});return false;"> Change </apex:outputLink> </td>
+										</tr>
+										<tr>
+											<td class="tableFull"> {!ao.Outcome_summary__c} </td>
+										</tr>
+										<tr>
+											<td class="tableLeft"> Key Change </td>
+											<td class="tableCenter"> </td>
+											<td><apex:outputLink onclick="deleteOutcome({!outcomeIndex});return false;"> Delete </apex:outputLink></td>
+										</tr>
+										<tr>
+											<td class="tableFull"> {!ao.Key_Change__c} </td>
+										</tr>
+										<tr>
+											<td class="tableLeft"> Measure </td>
+											<td class="tableCenter"> </td>
+										</tr>
+										<tr>
+											<td class="tableFull"> {!ao.Measure__c}  </td>
+										</tr>
+									</table>
+									<br/>
+									<br/>
+									<apex:variable var="outcomeIndex" value="{!VALUE(outcomeIndex) + 1}"/>
+								</apex:repeat>
+							</apex:pageBlock>
+
+
+                            <apex:pageBlock id="createOutcome" rendered="{!additionalSectionToShow == 'Outcomes' && outcomeToCreate != null}">
+								<h1 class="heading-xlarge">Fill in the details of the outcome</h1>
+                            	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 1}">
+	                                <apex:outputLabel value="Name of the outcome" />
+	                                <apex:pageBlockSectionItem>
+	                            		<apex:inputTextArea value="{!outcomeToCreate['Name']}"/>
+                            		</apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem/>
+	                                <apex:outputLabel>Please provide a summary of the what the outcome is</apex:outputLabel>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Outcome_Summary__c']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
+                            	</apex:pageBlockSection>
+                            	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 2}">
+	                            	<apex:outputLabel value="What is the key change for the user?" />
+	                            	<apex:pageBlockSectionItem>
+	                            		<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Outcome_Summary__c']}"/>
+                            		</apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem/>
+	                                <apex:outputLabel>How will the outcome be measured?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Measure__c']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+	                                <apex:commandButton styleClass="button" value="Insert Outcome" onclick="insertOutcome();return false;"/>
+                                </apex:pageBlockSection>
+                            </apex:pageBlock>
+							<!-- End of outcomes section !-->
+
+							<!-- Start of prev apps section !-->
+									<apex:pageBlock id="prevApps" rendered="{!additionalSectionToShow == 'Previous Applications' && prevAppToCreate == null}">
+										<h1 class="heading-xlarge">Details of the projects that were previously submitted</h1>
+										<apex:variable value="0" var="prevAppIndex"/>
+										<br/>
+										<apex:repeat value="{!prevApps}" var="pa">
+											<table class="tableRowHead">
+												<tr class="tableRowHead"> 
+													<td class="tableLeft"> Project Name </td>
+													<td class="tableCenter"> {!pa.Name} </td>
+													<td> <apex:outputLink onclick="setPrevApp({!prevAppIndex});return false;"> Edit </apex:outputLink> </td>
+												</tr>
+												<tr>
+												</tr>
+												<tr>
+													<td class="tableLeft"> Was It Successful </td>
+													<td class="tableCenter"> {!pa.Was_It_Successful__c} </td>
+													<td><apex:outputLink onclick="deletePrevApp({!prevAppIndex});return false;"> Delete </apex:outputLink></td>
+												</tr>
+												<tr>
+													<td class="tableLeft"> Reasons it was not successful? </td>
+												</tr>
+												<tr>
+													<td class="tableFull"> {!pa.Not_Successful_Reasons__c} </td>
+												</tr>
+											</table>
+										<br/>
+										<br/>
+										<apex:variable var="prevAppIndex" value="{!VALUE(prevAppIndex) + 1}"/>
+									</apex:repeat>
+								</apex:pageBlock>
+                            <apex:pageBlock id="createPrevApp" rendered="{!additionalSectionToShow == 'Previous Applications' && prevAppToCreate != null}">
+                            	<apex:pageBlockSection columns="1">
+                            		<h1 class="heading-xlarge">Fill in the project details</h1>
+                            		<apex:outputLabel>Name of the project</apex:outputLabel>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputText style="padding-left: 0px !important;" value="{!prevAppToCreate['Name']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+                                	<apex:outputLabel>Was it successful?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputField value="{!prevAppToCreate['Was_It_Successful__c']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+                                	<apex:outputLabel>What were the reasons it was not successful?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem>
+	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!prevAppToCreate['Not_Successful_Reasons__c']}"/>
+                                	</apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem/>
+                                	<apex:commandButton styleClass="button" value="Insert Project" onclick="insertPrevApp();return false;"/>
+                            	</apex:pageBlockSection>
+                            </apex:pageBlock>
+							<!-- End of prev Apps section !-->
+
+							<!-- Summary Page Section !-->
+                            <apex:pageBlock id="summaryPage" rendered="{!additionalSectionToShow == 'Section Summary'}">
+                                <apex:variable value="0" var="index"/>
+                                <h1 class="heading-xlarge">Check your answers for the section</h1> 
+                                <table class="topAndBottomPaddingAndBorder">
+                                    <apex:repeat value="{!qws}" var="qw">
+                                    	<tr width="100%">
+                                    		<td width="100%">
+                                				<apex:outputText style="color: grey;" value="{!qw.aqt.Application_Question__r.Question__c}"/>
+                                			</td>
+                                			<td>
+                                				<apex:outputLink rendered="{!formSection != 'ALL_QUESTIONS'}" styleClass="sectionLink" onclick="viewNewQuestion({!index});return false;"> Change </apex:outputLink>
+                            				</td>
+                            			</tr>
+                            			<tr>
+                            				<td>
+                                				<apex:outputText value="{!qw.answerSubmitted}"/>
+                                				<apex:outputPanel rendered="{!qw.applicationAnswer.Currency_Answer__c != null}">
+                                					<apex:outputField value="{!qw.applicationAnswer.Currency_Answer__c}"/>	
+                            					</apex:outputPanel>
+                                				<apex:outputText rendered="{!qw.answerSubmitted == null || qw.answerSubmitted == ''}"> &nbsp; </apex:outputText>
+                                			</td>
+                            			</tr>
+                                        <apex:variable var="index" value="{!VALUE(index) + 1}"/>
+                            		</apex:repeat>
+                        		</table>
+                            </apex:pageBlock>
+                            <!-- End of summary Section !-->
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- Page Block Buttons !-->
+                <div class="row" id="buttons">  
+                    <div class="col-md-12" style="padding-top:10px;">
+                    	<apex:pageBlockButtons style="padding-bottom: 20px;" location="bottom">
+                    		<apex:commandButton styleClass="button" rendered="{!additionalSectionToShow == 'Section Summary' && formSection != 'ALL_QUESTIONS'}" value="Mark section as complete and continue" onclick="markSectionAsComplete();return true;" reRender="form"/>
+                    		<apex:commandButton styleClass="button" rendered="{!formSection==''}" value="Submit application" onclick="saveAndSubmitConfirm();return false;" /><apex:commandButton styleClass="button" rendered="{!formSection==''}" value="View All Answers" onclick="viewAllAnswers();return false;" />
+                    		<apex:outputPanel rendered="{!formSection != '' && questionNumber != null}">
+								<apex:commandButton styleClass="button" rendered="{!hasNext && additionalSectionToShow != 'Section Summary'}" value="Save and continue" onclick="saveAndContinue('{!qw.aqt.Id}');return false;"/>
+								<apex:commandButton styleClass="button" rendered="{!!hasNext}" value="Save and continue" onclick="toggleDisplaySectionSummary('{!qw.aqt.Id}');return false;"/>
+								<br/>
+								<br/>
+								<apex:commandLink value="Save and come back later" onclick="saveAndContinueLater('{!qw.aqt.Id}','{!qw.aqt.Application_Question__c}');return false;"/>
+							</apex:outputPanel>
+							<apex:commandButton styleClass="button" rendered="{!formSection != null && formSection != commissionerHeading && formSection != '4. Outcomes' && questionNumber == null && additionalSectionToShow != 'Section Summary' && formSection != '7. Previous Applications'}" value= "Start Section >" onclick="viewNewQuestion('0');return false;"/>
+							<br/>
+
+							<!-- Commissioner Page Specific Buttons !-->
+							<apex:outputPanel rendered="{!formSection == commissionerHeading}">
+								<apex:commandButton styleClass="button" rendered="{!additionalSectionToShow == '' && questionNumber == null}" value="Start Section >" onclick="toggleSection('Commissioner');return false;"/>
+								<apex:outputPanel rendered="{!commissionerToCreate == null && additionalSectionToShow == 'Commissioner'}">
+									<apex:commandButton styleClass="button" value="Add a commissioner" rendered="{!applicationCommissioners.size < 1}" onclick="createCommissioner();return false;"/>
+									<apex:commandLink value="+ Add another commissioner " rendered="{!applicationCommissioners.size > 0}" onclick="createCommissioner();return false;"/>
+									<br/>
+									<br/>
+	                            	<apex:commandButton styleClass="button" rendered="{!applicationCommissioners.size > 0}" value="Save and continue" onclick="viewNewQuestion('0');return false;"/>
+									<br/>
+									<br/>
+                            		<apex:commandLink value="Save and come back later" onclick="setFormSection('');return false;"/>
+								</apex:outputPanel>
+                        	</apex:outputPanel>
+
+                        	<apex:outputPanel rendered="{!formSection == '4. Outcomes'}">
+								<apex:commandButton styleClass="button" rendered="{!additionalSectionToShow == '' && questionNumber == null}" value="Start Section >" onclick="toggleSection('Outcomes');return false;"/>
+								<apex:outputPanel rendered="{!outcomeToCreate == null && additionalSectionToShow == 'Outcomes'}">
+									<apex:commandButton styleClass="button" value="Add an outcome" rendered="{!applicationOutcomes.size < 1}" onclick="createOutcome();return false;"/>
+									<apex:commandLink value="+ Add another outcome " rendered="{!applicationOutcomes.size > 0}" onclick="createOutcome();return false;"/>
+									<br/>
+									<br/>
+	                            	<apex:commandButton styleClass="button" rendered="{!applicationOutcomes.size > 0}" value="Save and continue" onclick="viewNewQuestion('0');return false;"/>
+									<br/>
+									<br/>
+                            		<apex:commandLink value="Save and come back later" onclick="setFormSection('');return false;"/>
+								</apex:outputPanel>
+                        	</apex:outputPanel>
+
+                        	<!-- Prev App Buttons !-->
+                        	<apex:outputPanel rendered="{!formSection == '7. Previous Applications'}">
+								<apex:commandButton styleClass="button" rendered="{!additionalSectionToShow == '' && questionNumber == null}" value="Start Section >" onclick="toggleSection('Previous Applications');return false;"/>
+								<apex:outputPanel rendered="{!prevAppToCreate == null && additionalSectionToShow == 'Previous Applications'}">
+									<apex:commandButton styleClass="button" value="Add a project" rendered="{!prevApps.size < 1}" onclick="createPrevApp();return false;"/>
+									<apex:commandLink value="+ Add another project " rendered="{!prevApps.size > 0}" onclick="createPrevApp();return false;"/>
+									<br/>
+									<br/>
+	                            	<apex:commandButton styleClass="button" rendered="{!prevApps.size > 0}" value="Save and continue" onclick="viewNewQuestion('0');return false;"/>
+									<br/>
+									<br/>
+                            		<apex:commandLink value="Save and come back later" onclick="setFormSection('');return false;"/>
+								</apex:outputPanel>
+                        	</apex:outputPanel>
+
+                        	<!-- End Prev App Buttons !-->
+						</apex:pageBlockButtons>
+			        </div>
+				</div>
+				</apex:pageBlock>
+				<!-- Page Block Buttons !-->
+
+				<!-- Action Methods !-->
+				<apex:actionFunction name="viewNewQuestion" action="{!setQuestionNumber}" rerender="form">
+					<apex:param name="questionNumber" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="setFormSection" action="{!setFormSection}" rerender="form">
+					<apex:param name="formSectionHeader" value=""/>
+				</apex:actionFunction>
+
+				<!-- Commissioner Methods !-->
+				<apex:actionFunction name="deleteCommissioner" action="{!deleteCommissioner}" rerender="form">
+					<apex:param name="commissionerIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="setCommissioner" action="{!setCommissioner}" rerender="form">
+					<apex:param name="commissionerIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="createCommissioner" action="{!createCommisioner}" rerender="form"/>
+				<apex:actionFunction name="insertCommissioner" action="{!insertCommissioner}" rerender="form"/>
+				<!-- End Commissioner Methods !-->
+
+				<!-- Outcome Methods !-->
+				<apex:actionFunction name="deleteOutcome" action="{!deleteOutcome}" rerender="form">
+					<apex:param name="outcomeIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="setOutcome" action="{!setOutcome}" rerender="form">
+					<apex:param name="outcomeIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="createOutcome" action="{!createOutcome}" rerender="form"/>
+				<apex:actionFunction name="insertOutcome" action="{!insertOutcome}" rerender="form"/>
+				<!-- End Outcome Methods !-->
+
+				<!-- Prev App Methods !-->
+				<apex:actionFunction name="deletePrevApp" action="{!deletePrevApp}" rerender="form">
+					<apex:param name="prevAppIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="setPrevApp" action="{!setPrevApp}" rerender="form">
+					<apex:param name="prevAppIndex" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="createPrevApp" action="{!createPrevApp}" rerender="form"/>
+				<apex:actionFunction name="insertPrevApp" action="{!insertPrevApp}" rerender="form"/>
+				<!-- End Prev App Methods !-->
+
+				<!-- Save Methods !-->
+				<apex:actionFunction name="upsertAnswer" action="{!upsertAnswer}" rerender="form">
+					<apex:param name="questionId" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="saveAndContinueLater" action="{!saveAndContinueLater}" rerender="form">
+					<apex:param name="questionId" value=""/>
+					<apex:param name="appQuestionId" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="saveAndContinue" action="{!saveAndContinue}" rerender="form">
+					<apex:param name="questionId" value=""/>
+				</apex:actionFunction>
+				<!-- End Save Methods !-->
+
+				<apex:actionFunction name="toggleSection" action="{!toggleSection}" immediate="true" rerender="form">
+					<apex:param name="additionalSection" value=""/>
+				</apex:actionFunction>
+
+
+				<apex:actionFunction name="markSectionAsComplete" action="{!markSectionAsComplete}" rerender="form"/>
+				<apex:actionFunction name="toggleQuestionHelpText" action="{!toggleDisplayQuestionHelpText}" reRender="form"/>
+				<apex:actionFunction name="saveAndSubmit" action="{!saveAndSubmit}" reRender="form"/>
+				<apex:actionFunction name="toggleDisplaySectionSummary" action="{!toggleDisplaySectionSummary}" rerender="form">
+					<apex:param name="questionId" value=""/>
+				</apex:actionFunction>
+				<apex:actionFunction name="viewAllAnswers" action="{!viewAllAnswers}" rerender="form"/>
+				<apex:actionFunction name="returnToHomePage" action="{!returnHomePage}" rerender="form"/>
+				<!-- End of action methods !-->
+
+				<!-- Pop Up Functions !-->
+				<script>
+					function saveAndSubmitConfirm() {
+					    var strconfirm = confirm("You are about to make an application. Are you sure that you want to continue?");
+					    if (strconfirm == true) {
+					        saveAndSubmit();
+					    }
+					}
+				</script>
+				<script>
+					function returnToHomePageConfirm() {
+					    var strconfirm = confirm("You are moving away from the current application. Would you like to proceed?");
+					    if (strconfirm == true) {
+					        returnToHomePage();
+					    }
+					}
+				</script>
+				<!-- End pop up functions !-->
+			</apex:form>
+		</apex:define>
+	</apex:composition>
+</apex:page>
