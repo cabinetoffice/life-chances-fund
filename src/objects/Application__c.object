@@ -49,6 +49,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>true</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
@@ -142,9 +143,25 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Dev_Form_External_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+   OR(
+      TEXT(Development_Form_Status__c) = &quot;Under Review&quot;, 
+      TEXT(Development_Form_Status__c) = &quot;Ready for Approval&quot;
+   ), &quot;Submitted&quot;, TEXT(Development_Form_Status__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dev Form External Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Development_Form_Status__c</fullName>
         <externalId>false</externalId>
-        <label>Development Form Status</label>
+        <label>Dev Form Status</label>
         <picklist>
             <picklistValues>
                 <fullName>Draft</fullName>
@@ -179,6 +196,22 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>EOI_External_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+   OR(
+      TEXT(Status__c) = &quot;Under Review&quot;, 
+      TEXT(Status__c) = &quot;Ready for Approval&quot;
+   ), &quot;Submitted&quot;, TEXT(Status__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>EOI External Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Is_Submitted__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -201,6 +234,17 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Organisation_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.Account.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Organisation Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Reviewer__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -215,7 +259,7 @@
     <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
-        <label>Status</label>
+        <label>EOI Status</label>
         <picklist>
             <picklistValues>
                 <fullName>Draft</fullName>
@@ -272,7 +316,7 @@
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>Applications_In_Review</fullName>
+        <fullName>Applications_Assigned_to_me</fullName>
         <columns>NAME</columns>
         <columns>Contact__c</columns>
         <columns>Status__c</columns>
@@ -280,38 +324,10 @@
         <filterScope>Everything</filterScope>
         <filters>
             <field>Reviewer__c</field>
-            <operation>notEqual</operation>
+            <operation>contains</operation>
+            <value>Nithya</value>
         </filters>
-        <filters>
-            <field>Status__c</field>
-            <operation>notEqual</operation>
-            <value>Draft,Successful,Unsuccessful</value>
-        </filters>
-        <label>Applications - In Review</label>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Applications_Ready_For_Review</fullName>
-        <columns>NAME</columns>
-        <columns>Contact__c</columns>
-        <columns>Status__c</columns>
-        <columns>Reviewer__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>Status__c</field>
-            <operation>equals</operation>
-            <value>Submitted</value>
-        </filters>
-        <filters>
-            <field>Reviewer__c</field>
-            <operation>equals</operation>
-        </filters>
-        <label>Applications - Ready For Review</label>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
+        <label>Applications - Assigned to me</label>
     </listViews>
     <listViews>
         <fullName>Submitted</fullName>

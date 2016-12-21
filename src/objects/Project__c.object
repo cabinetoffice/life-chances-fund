@@ -50,6 +50,7 @@
     <description>Projects, which can also be called Social Impact Bonds, are separate entities, which have a social improvement aim. The difference between these and grants or loans are the way they are structured, where the funding comes in avg 20% from gov funding and 80% from a private investor and the payment from gov is only given upon agreed specific outcomes being achieved</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>

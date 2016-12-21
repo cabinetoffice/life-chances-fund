@@ -49,7 +49,7 @@
                                     	</apex:commandLink>
                                     	<apex:outputPanel >
 		                                	<br/>
-	                                    	<apex:outputText rendered="{!displayQuestionHelpText == true}" value="{!qw.aqt.Application_Question__r.Help_Text__c}"/>
+	                                    	<apex:outputText rendered="{!displayQuestionHelpText == true}" escape="false" value="{!qw.aqt.Application_Question__r.Help_Text__c}"/>
 										</apex:outputPanel>
                                     	<br/>
                                 	</apex:outputPanel>
@@ -109,7 +109,9 @@
 
 
                                 	</div>
-                                	<apex:outputText styleClass="charCount" rendered="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c != ''}" value="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c}"/>
+                                	<div align="right" style="width:729px;">
+                                		<apex:outputText rendered="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c != ''}" value="{!qw.aqt.Application_Question__r.Character_Word_Assistance__c}"/>
+                            		</div>
 								</div>
 								<br/>
 								<br/>
@@ -154,45 +156,45 @@
 								<h1 class="heading-xlarge">Fill in the commissioners details</h1>
                             	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 1}">
 	                                <apex:outputLabel value="Name of the commissioners organisation" />
-	                                <apex:pageBlockSectionItem>
+	                                <apex:pageBlockSectionItem >
 	                            		<apex:inputText value="{!organisationToCreate['Name']}"/>
                             		</apex:pageBlockSectionItem>
-                            		<apex:pageBlockSectionItem/>
+                            		<apex:pageBlockSectionItem />
 	                                <apex:outputLabel value="First name of the lead contact for the commissioner"/>
-	                                <apex:pageBlockSectionItem>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputText value="{!commissionerToCreate['FirstName']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
 	                                <apex:outputLabel value="Last name of the lead contact for the commissioner"/>
-	                                <apex:pageBlockSectionItem>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputText value="{!commissionerToCreate['LastName']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
 	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
                             	</apex:pageBlockSection>
                             	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 2}">
 	                            	<apex:outputLabel value="Email address" />
-	                            	<apex:pageBlockSectionItem>
+	                            	<apex:pageBlockSectionItem >
 	                            		<apex:inputText value="{!commissionerToCreate['Email']}"/>
                             		</apex:pageBlockSectionItem>
-                            		<apex:pageBlockSectionItem/>
+                            		<apex:pageBlockSectionItem />
 	                                <apex:outputLabel value="Phone number" />
-	                            	<apex:pageBlockSectionItem>
+	                            	<apex:pageBlockSectionItem >
 	                            		<apex:inputText value="{!commissionerToCreate['Phone']}"/>
                             		</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
 	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
                                 </apex:pageBlockSection>
                                 <apex:pageBlockSection columns="1" rendered="{!pageNumber == 3}">
                                 	<apex:outputLabel value="What region is the commissioner in?" />
-	                            	<apex:pageBlockSectionItem>
+	                            	<apex:pageBlockSectionItem >
 	                            		<apex:repeat value="{!regionWrapper}" var="cbw">
 	                                        <apex:inputCheckbox disabled="{!disable}" value="{!cbw.isSelected}"/>
 	                                        <apex:outputText value="{!cbw.checkboxName}"/> 
 	                                        <br/>
 	                                    </apex:repeat>
                             		</apex:pageBlockSectionItem>
-                            		<apex:pageBlockSectionItem/>
+                            		<apex:pageBlockSectionItem />
 	                                <apex:commandButton styleClass="button" value="Insert Commissioner" onclick="insertCommissioner();return false;"/>
                                 </apex:pageBlockSection>
                             </apex:pageBlock>
@@ -241,28 +243,28 @@
 								<h1 class="heading-xlarge">Fill in the details of the outcome</h1>
                             	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 1}">
 	                                <apex:outputLabel value="Name of the outcome" />
-	                                <apex:pageBlockSectionItem>
+	                                <apex:pageBlockSectionItem >
 	                            		<apex:inputTextArea value="{!outcomeToCreate['Name']}"/>
                             		</apex:pageBlockSectionItem>
-                            		<apex:pageBlockSectionItem/>
-	                                <apex:outputLabel>Please provide a summary of the what the outcome is</apex:outputLabel>
-	                                <apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem />
+	                                <apex:outputLabel >Please provide a summary of the what the outcome is</apex:outputLabel>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Outcome_Summary__c']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
 	                                <apex:commandButton styleClass="button" value="Continue" reRender="form" action="{!nextPage}"/>
                             	</apex:pageBlockSection>
                             	<apex:pageBlockSection columns="1" rendered="{!pageNumber == 2}">
 	                            	<apex:outputLabel value="What is the key change for the user?" />
-	                            	<apex:pageBlockSectionItem>
+	                            	<apex:pageBlockSectionItem >
 	                            		<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Outcome_Summary__c']}"/>
                             		</apex:pageBlockSectionItem>
-                            		<apex:pageBlockSectionItem/>
-	                                <apex:outputLabel>How will the outcome be measured?</apex:outputLabel>
-	                                <apex:pageBlockSectionItem>
+                            		<apex:pageBlockSectionItem />
+	                                <apex:outputLabel >How will the outcome be measured?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!outcomeToCreate['Measure__c']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
 	                                <apex:commandButton styleClass="button" value="Insert Outcome" onclick="insertOutcome();return false;"/>
                                 </apex:pageBlockSection>
                             </apex:pageBlock>
@@ -302,21 +304,21 @@
                             <apex:pageBlock id="createPrevApp" rendered="{!additionalSectionToShow == 'Previous Applications' && prevAppToCreate != null}">
                             	<apex:pageBlockSection columns="1">
                             		<h1 class="heading-xlarge">Fill in the project details</h1>
-                            		<apex:outputLabel>Name of the project</apex:outputLabel>
-	                                <apex:pageBlockSectionItem>
+                            		<apex:outputLabel >Name of the project</apex:outputLabel>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputText style="padding-left: 0px !important;" value="{!prevAppToCreate['Name']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
-                                	<apex:outputLabel>Was it successful?</apex:outputLabel>
-	                                <apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem />
+                                	<apex:outputLabel >Was it successful?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputField value="{!prevAppToCreate['Was_It_Successful__c']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
-                                	<apex:outputLabel>What were the reasons it was not successful?</apex:outputLabel>
-	                                <apex:pageBlockSectionItem>
+                                	<apex:pageBlockSectionItem />
+                                	<apex:outputLabel >What were the reasons it was not successful?</apex:outputLabel>
+	                                <apex:pageBlockSectionItem >
 	                                	<apex:inputTextArea style="height:129px;width:729px;" value="{!prevAppToCreate['Not_Successful_Reasons__c']}"/>
                                 	</apex:pageBlockSectionItem>
-                                	<apex:pageBlockSectionItem/>
+                                	<apex:pageBlockSectionItem />
                                 	<apex:commandButton styleClass="button" value="Insert Project" onclick="insertPrevApp();return false;"/>
                             	</apex:pageBlockSection>
                             </apex:pageBlock>
@@ -358,8 +360,17 @@
                 <div class="row" id="buttons">  
                     <div class="col-md-12" style="padding-top:10px;">
                     	<apex:pageBlockButtons style="padding-bottom: 20px;" location="bottom">
-                    		<apex:commandButton styleClass="button" rendered="{!additionalSectionToShow == 'Section Summary' && formSection != 'ALL_QUESTIONS'}" value="Mark section as complete and continue" onclick="markSectionAsComplete();return true;" reRender="form"/>
-                    		<apex:commandButton styleClass="button" rendered="{!formSection==''}" value="Submit application" onclick="saveAndSubmitConfirm();return false;" /><apex:commandButton styleClass="button" rendered="{!formSection==''}" value="View All Answers" onclick="viewAllAnswers();return false;" />
+                    		<apex:outputPanel rendered="{!additionalSectionToShow == 'Section Summary' && formSection != 'ALL_QUESTIONS'}">
+	                    		<apex:commandButton styleClass="button"  value="Mark section as complete and continue" onclick="markSectionAsComplete();return true;" reRender="form"/>
+	                    		<br/>
+	                    		<br/>
+	                    		<apex:commandLink rendered="{!additionalSectionToShow == 'Section Summary' && formSection != 'ALL_QUESTIONS'}" value="Save and come back later" onclick="saveAndContinueLater('','');return false;"/>
+                    		</apex:outputPanel>
+                    		<apex:commandButton styleClass="button" rendered="{!formSection==''}" value="Submit application" onclick="saveAndSubmitConfirm();return false;" />
+                    		<apex:outputPanel rendered="{!formSection==''}">
+                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    		</apex:outputPanel>
+                    		<apex:commandLink style="align-self:right;" rendered="{!formSection==''}" value="Download summary of answers (PDF)" onclick="viewAllAnswers();return false;" />
                     		<apex:outputPanel rendered="{!formSection != '' && questionNumber != null}">
 								<apex:commandButton styleClass="button" rendered="{!hasNext && additionalSectionToShow != 'Section Summary'}" value="Save and continue" onclick="saveAndContinue('{!qw.aqt.Id}');return false;"/>
 								<apex:commandButton styleClass="button" rendered="{!!hasNext}" value="Save and continue" onclick="toggleDisplaySectionSummary('{!qw.aqt.Id}');return false;"/>

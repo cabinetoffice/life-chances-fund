@@ -45,7 +45,7 @@ public with sharing class SIB_ApplicationFormExtension {
         hasNext = false;
         getCurrentApplication();
         String formType = getParam('formType');
-        statusField = formType == 'Expression of Interest' ? 'EOI_External_Status__c' : 'Dev_Form_External_Status__c';
+        statusField = formType == 'Expression of Interest' ? 'Status__c' : 'Development_Form_Status__c';
         disable = currApp.get(statusField) != 'Draft' && currApp.get(statusField) != '' && currApp.get(statusField) != null; 
         setBranchingMap();
         applicationOutcomes = currApp.Outcomes__r;
@@ -118,7 +118,16 @@ public with sharing class SIB_ApplicationFormExtension {
     }
 
     public PageReference previous(){
-        //On commissioner sections
+        if(additionalSectionToShow == 'Section Summary'){
+        // Is on summary page, should reset question number to last question on list.
+            toggleDisplaySectionSummary();
+            System.debug('questionNumber: ' + questionNumber);
+            questionNumber = getqwSize(formSection);
+            System.debug('questionNumber: ' + questionNumber);
+            updateQuestionNumber(-1);
+            return null;
+        // If on the section help text page, should clear help text page.
+        } 
         if(formSection == 'ALL_QUESTIONS'){
             clearAdditionalSectionToShow();
             clearFormSection();
@@ -145,13 +154,7 @@ public with sharing class SIB_ApplicationFormExtension {
                 clearFormSection();
                 clearAdditionalSectionToShow();
             }
-        }else if(additionalSectionToShow == 'Summary Section'){
-        // Is on summary page, should reset question number to last question on list.
-            toggleDisplaySectionSummary();
-            questionNumber = getqwSize(formSection);
-            updateQuestionNumber(-1);
-        // If on the section help text page, should clear help text page.
-        } else if(questionNumber == null){
+        }else if(questionNumber == null){
             clearFormSection();
             clearAdditionalSectionToShow();
         //If on first question, should clear question number, so the help text page toggles again
@@ -604,6 +607,9 @@ public with sharing class SIB_ApplicationFormExtension {
         SectionWrapper sw = sectionWrappers.get(formSection);
         sw.status = 'IN PROGRESS';
         String aqtId = getParam('questionId');
+        if(String.isBlank(aqtId)){
+            return;
+        }
         Map<Id, ApplicationQuestionHolder> questionHolderMap = sectionWrappers.get(formSection).aqhMap;
         ApplicationQuestionHolder aqh = questionHolderMap.get(aqtId);
         Application_Answer__c answerToUpsert = aqh.applicationAnswer;
@@ -702,7 +708,7 @@ public with sharing class SIB_ApplicationFormExtension {
             SELECT Id, Application_Window_Template__c, Contact__c, Application_Window_Template__r.Application_Window__r.Is_Live__c, Is_Submitted__c,
             Last_Answered_Question__c, Application_Window_Template__r.Application_Window__r.Start_Date__c, Development_Form_Status__c,
             Application_Window_Template__r.Application_Window__c, Application_Window_Template__r.Application_Window__r.End_Date__c,
-            Dev_Form_External_Status__c, EOI_External_Status__c, (
+            Dev_Form_External_Status__c, EOI_External_Status__c, Status__c, (
                 SELECT Measure__c, Outcome_Summary__c, Name, Key_Change__c
                 FROM Outcomes__r
             ), (

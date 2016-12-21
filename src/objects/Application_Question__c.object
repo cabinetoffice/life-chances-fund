@@ -49,6 +49,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -279,8 +280,8 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <length>32768</length>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>4</visibleLines>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
     </fields>
     <fields>
         <fullName>Is_Branching_Question__c</fullName>
@@ -416,6 +417,13 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
     </fields>
     <label>Application Question</label>
     <listViews>
+        <fullName>All</fullName>
+        <columns>Question_Number__c</columns>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
         <fullName>With_Helptext</fullName>
         <columns>Question_Number__c</columns>
         <columns>NAME</columns>
@@ -440,6 +448,10 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <customTabListAdditionalFields>Required__c</customTabListAdditionalFields>
         <lookupDialogsAdditionalFields>Question_Type__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Question__c</lookupDialogsAdditionalFields>
+        <lookupFilterFields>NAME</lookupFilterFields>
+        <lookupFilterFields>Question__c</lookupFilterFields>
+        <lookupPhoneDialogsAdditionalFields>Question__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>Question__c</searchFilterFields>
         <searchResultsAdditionalFields>Question_Type__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Question__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Required__c</searchResultsAdditionalFields>

@@ -13,6 +13,7 @@
 	}
 	.longText {
 	    position: relative;
+	    width:729px;
   	}
 	.charCount {
 	    margin: 0px;
@@ -22,6 +23,7 @@
 	    padding-left: 19%; 
 	    padding-right:19%;
 	    position: relative;
+	    width:729px;
 	}
 	.tableLeft{
 		width:60%;
@@ -116,7 +118,6 @@
 		<div id="global-header-bar"/>
 		
 		<div class="phase-banner" style="max-width: 960px;margin:0 auto;">
-			<strong class="phase-tag">BETA</strong>
 			<text class="betaLink"> BETA </text> This is a new service - your <a href="mailto:lifechancesfund@cabinetoffice.gov.uk" target="_blank"> feedback </a> will help us to improve it.
 		</div>
 		<div style="max-width: 960px;margin:0 auto;">
