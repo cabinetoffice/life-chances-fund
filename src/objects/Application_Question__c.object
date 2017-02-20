@@ -195,6 +195,10 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
                 <fullName>Short_Text_Answer__c</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>Radio_Answer__c</fullName>
+                <default>false</default>
+            </picklistValues>
             <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
@@ -420,6 +424,12 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <fullName>All</fullName>
         <columns>Question_Number__c</columns>
         <columns>NAME</columns>
+        <columns>Question_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

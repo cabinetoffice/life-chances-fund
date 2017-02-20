@@ -17,10 +17,10 @@ public with sharing class SIB_Utilities {
 			ORDER BY CreatedDate ASC
 		]){
 			if(String.isNotBlank(singleQuestionTemplate.Application_Question__r.Field_From_Contact_Record__c)){
-				fieldsToReturn = fieldsToReturn + singleQuestionTemplate.Application_Question__r.Field_From_Contact_Record__c + ',';
+				fieldsToReturn += singleQuestionTemplate.Application_Question__r.Field_From_Contact_Record__c + ',';
 			}
 		}
-		fieldsToReturn = fieldsToReturn + 'Id';
+		fieldsToReturn += 'Id';
 		return fieldsToReturn;
 	}
 
@@ -37,15 +37,15 @@ public with sharing class SIB_Utilities {
 	}
 
 	public static PageReference checkLoggedInStatus(){
-		if(UserInfo.getUserId() == null || UserInfo.getUserName() == 'social_impact_bonds@dev-sibs.cs80.force.com'){
-            returnHomePage();
-        }
-        return null;
-	}
+        System.debug('UserInfo.getUserName():'+ UserInfo.getUserName());
+		PageReference pageReferenceToReturn = 
+		UserInfo.getUserId() == null || UserInfo.getUserName().startsWith('social_impact_bonds@') ? 
+			returnHomePage() : 
+			null;
+        return pageReferenceToReturn;
+	}   
 
 	public static PageReference returnHomePage(){
 		return new PageReference(Site.getBaseUrl());
 	}
-
-	public SIB_Utilities(SIB_ChangePasswordController controller){}
 }

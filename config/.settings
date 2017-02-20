@@ -1,19 +1,19 @@
 {
-    "projectName": "Cabinet Office - Dev",
-    "username": "westbrookadmin@cabinetoffice.co.uk.dev",
-    "id": "7e9e4920-91f0-11e6-a43a-0577bcbf66ea",
+    "projectName": "Cabinet Office - Prod",
+    "username": "westbrookadmin@cabinetoffice.co.uk",
+    "id": "dc0f7b30-ef90-11e6-ba8f-fdac46bf93cf",
     "namespace": "",
     "orgType": "developer",
     "loginUrl": "https://login.salesforce.com/",
-    "instanceUrl": "https://cs80.salesforce.com",
+    "instanceUrl": "https://eu11.salesforce.com",
     "workspace": "C:\\workspaces\\MavensMate",
     "subscription": [
         "ApexClass",
         "ApexComponent",
         "ApexPage",
         "ApexTrigger",
-        "Community",
+        "CustomLabels",
         "CustomObject",
-        "Settings"
+        "StaticResource"
     ]
 }

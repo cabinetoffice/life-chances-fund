@@ -1,0 +1,1478 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"questionNum",
+				"updateQuestionNumber"
+			],
+			[
+				"pre",
+				"prevAppToCreate"
+			],
+			[
+				"additionalSe",
+				"additionalSectionToShow"
+			],
+			[
+				"align",
+				"align-content"
+			],
+			[
+				"outp",
+				"apex:outputText"
+			],
+			[
+				"r",
+				"richText\t(Boolean)"
+			],
+			[
+				"st",
+				"standardStylesheets\t(Boolean)"
+			],
+			[
+				"addition",
+				"setAdditionalSectionToShow"
+			],
+			[
+				"a",
+				"align\tAttr"
+			],
+			[
+				"add",
+				"additionalQuestion"
+			],
+			[
+				"sectionWra",
+				"sectionWrapperKey"
+			],
+			[
+				"pageNum",
+				"pageNumber"
+			],
+			[
+				"update",
+				"updateQuestionNumber"
+			],
+			[
+				"App",
+				"Application_Question__c"
+			],
+			[
+				"aq",
+				"aqt"
+			],
+			[
+				"comii",
+				"commissionerToCreate"
+			],
+			[
+				"A",
+				"ApplicationQuestionHolder"
+			],
+			[
+				"sy",
+				"styleClass\t(String)"
+			],
+			[
+				"setAn",
+				"setAnswerSubmitted"
+			],
+			[
+				"asser",
+				"assertEquals()"
+			],
+			[
+				"orga",
+				"organisationToCreate"
+			],
+			[
+				"getUser",
+				"PUBLIC getUserEmail() \tString"
+			],
+			[
+				"or",
+				"organisation"
+			],
+			[
+				"getU",
+				"PUBLIC getUserEmail() \tString"
+			],
+			[
+				"contac",
+				"contactToInsert"
+			],
+			[
+				"con",
+				"contactToInsert"
+			],
+			[
+				"outpu",
+				"apex:outputPanel"
+			],
+			[
+				"Applica",
+				"Application_Window__c\t[Sobject Name]"
+			],
+			[
+				"Appli",
+				"Application_Question_Template__c\t[Sobject Name]"
+			],
+			[
+				"Da",
+				"DataFactory"
+			],
+			[
+				"Applicat",
+				"Application_Question__c\t[Sobject Name]"
+			],
+			[
+				"the",
+				"themeToInsert"
+			],
+			[
+				"inp",
+				"apex:inputField"
+			],
+			[
+				"select",
+				"selectOptions"
+			],
+			[
+				"Mess",
+				"apex:messages"
+			],
+			[
+				"onse",
+				"onselect\tAttr"
+			],
+			[
+				"s",
+				"styleClass\t(String)"
+			],
+			[
+				"e",
+				"extensions\t(String)"
+			],
+			[
+				"c",
+				"colspan\tAttr"
+			],
+			[
+				"border-bo",
+				"border-bottom"
+			],
+			[
+				"ac",
+				"action\t(ApexPages.Action)"
+			],
+			[
+				"additional",
+				"additionalSectionToShow"
+			],
+			[
+				"co",
+				"columns\t(Integer)"
+			],
+			[
+				"prevApp",
+				"prevAppToCreate"
+			],
+			[
+				"regin",
+				"regionWrapper"
+			],
+			[
+				"generate",
+				"generateRegionCBW"
+			],
+			[
+				"pageBlockSection",
+				"apex:pageBlockSectionItem"
+			],
+			[
+				"re",
+				"reRender\t(Object)"
+			],
+			[
+				"DE",
+				"Dev_Form_External_Status__c"
+			],
+			[
+				"addE",
+				"addMesssageToPage"
+			],
+			[
+				"Application",
+				"ApplicationQuestionHolder"
+			],
+			[
+				"Application_Window_",
+				"Application_Window_Template__c\t[Sobject Name]"
+			],
+			[
+				"Applic",
+				"Application_Question_Template__c"
+			],
+			[
+				"selec",
+				"selectedTheme"
+			],
+			[
+				"SIB_Application",
+				"SIB_ApplicationList\t[Visualforce Page]"
+			],
+			[
+				"clear",
+				"clearQuestionNumber"
+			],
+			[
+				"addM",
+				"addMesssageToPage"
+			],
+			[
+				"applicati",
+				"applicationOutcomes"
+			],
+			[
+				"outcomes",
+				"applicationOutcomes"
+			],
+			[
+				"additi",
+				"additionalSectionToShow"
+			],
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"SIB",
+				"SIB_ApplicationList\t[Visualforce Page]"
+			],
+			[
+				"border-col",
+				"border-color"
+			],
+			[
+				"displayQ",
+				"toggleDisplayQuestionHelpText"
+			],
+			[
+				"border",
+				"border-top-width"
+			],
+			[
+				"app",
+				"applicationCommissioners"
+			],
+			[
+				"commisioner",
+				"commissionerHeading"
+			],
+			[
+				"SIB_",
+				"SIB_Landing\t[Visualforce Page]"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
+				"sty",
+				"style\t(String)"
+			],
+			[
+				"border-bott",
+				"border-bottom-style"
+			],
+			[
+				"border-bottt",
+				"border-bottom-width"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"styl",
+				"styleClass\t(String)"
+			],
+			[
+				"padd",
+				"padding-right"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"borde",
+				"border-top-color"
+			],
+			[
+				"border-top",
+				"border-top-width"
+			],
+			[
+				"output",
+				"apex:outputPanel"
+			],
+			[
+				"toggle",
+				"toggleCommissionerDetails"
+			],
+			[
+				"comm",
+				"commissionerSectionDetails"
+			],
+			[
+				"out",
+				"apex:outputText"
+			],
+			[
+				"gene",
+				"generateCommissionerStatus"
+			],
+			[
+				"commissioners",
+				"applicationCommissioners"
+			],
+			[
+				"cle",
+				"clearFormSection"
+			],
+			[
+				"return",
+				"returnHomePage"
+			],
+			[
+				"Page",
+				"PageReference\t[Standard Apex Class]"
+			],
+			[
+				"set",
+				"setAnswerSubmitted"
+			],
+			[
+				"formSe",
+				"formSectionToSave"
+			],
+			[
+				"currentAp",
+				"returnCurrentApplicationQuestionTemplate"
+			],
+			[
+				"sec",
+				"SectionWrapper"
+			],
+			[
+				"section",
+				"sectionNameToCompleteBoolean"
+			],
+			[
+				"style",
+				"style\t(String)"
+			],
+			[
+				"to",
+				"toggleDisplaySectionSummary"
+			],
+			[
+				"formS",
+				"formSectionName"
+			],
+			[
+				"getQues",
+				"getQuestionWrapperSize"
+			],
+			[
+				"di",
+				"disabled\t(Boolean)"
+			],
+			[
+				"sa",
+				"saveMethod"
+			],
+			[
+				"question",
+				"questionNumber"
+			],
+			[
+				"d",
+				"disabled\t(Boolean)"
+			],
+			[
+				"commissione",
+				"commissionerToCreate"
+			],
+			[
+				"commisi",
+				"commissionerToCreate"
+			],
+			[
+				"last",
+				"lastAnsweredQuestionIndex"
+			],
+			[
+				"previ",
+				"previouslyAnsweredQuestions"
+			],
+			[
+				"las",
+				"lastAnsweredQuestionIndex"
+			],
+			[
+				"lastA",
+				"lastAnsweredQuestionIndex"
+			],
+			[
+				"String",
+				"String\t[Standard Apex Class]"
+			],
+			[
+				"ques",
+				"questionWrapper"
+			],
+			[
+				"previo",
+				"previousFormSection"
+			],
+			[
+				"pageBlock",
+				"apex:pageBlockButtons"
+			],
+			[
+				"form",
+				"formSectionQuestions"
+			],
+			[
+				"singleApp",
+				"singleApplicationQuestionHolder"
+			],
+			[
+				"curr",
+				"currentApplication"
+			],
+			[
+				"isF",
+				"isValidRegistrationForm"
+			],
+			[
+				"v",
+				"value\t(Object)"
+			],
+			[
+				"application",
+				"applicationWindowToCheck"
+			],
+			[
+				"rad",
+				"apex:selectRadio"
+			],
+			[
+				"selected",
+				"selectedApplicationWindow"
+			],
+			[
+				"applica",
+				"applicationWindowToApplicationMap"
+			],
+			[
+				"Application_Win",
+				"Application_Window__c\t[Sobject Name]"
+			],
+			[
+				"PageblockS",
+				"apex:pageBlockSectionItem"
+			],
+			[
+				"sele",
+				"selectedApplicationWindow"
+			],
+			[
+				"put",
+				"PUBLIC put(ANY key, ANY value) \tString"
+			],
+			[
+				"Is",
+				"Is_Live__c"
+			],
+			[
+				"Application_",
+				"Application_Window_Template__c"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 101.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 549.0
+	},
+	"console":
+	{
+		"height": 162.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/workspaces/MavensMate/Cabinet Office - Prod",
+		"/C/workspaces/MavensMate/Cabinet Office - Prod/src"
+	],
+	"file_history":
+	[
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationFormExtension.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_SelfRegController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_NewApplicationController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/CommunitiesSelfRegController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ForgotPassword.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/ForgotPasswordController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_SelfReg.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/Exception.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ChangePassword.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ForgotPasswordConfirm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ErrorPage.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/ChangePassword.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_Template.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ApplicationFormTest.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SiteLoginController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ChangePasswordControllerTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationFormExtensionTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ChangePasswordController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ApplicationForm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationListController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ApplicationList.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/DataFactory.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_ApplicationConfirm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/ForgotPasswordConfirm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_NewApplication.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_Utilities.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_Login.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_SelfRegControllerTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_UtilitiesTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_SelfRegConfirm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/CommunitiesSelfRegConfirmController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_NewApplicationControllerTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationExtension.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationListControllerTest.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationConfirmController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/ChangePasswordController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/ChangePasswordControllerTest.cls",
+		"/C/Users/David/AppData/Local/Temp/wze6be/govuk-static-test/stylesheets/main.css",
+		"/C/Users/David/AppData/Local/Temp/wz994a/govuk-static-test/stylesheets/main.css",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_Landing.page",
+		"/C/Users/David/AppData/Local/Temp/wz1d47/govuk-static-test/stylesheets/elements-page.css",
+		"/C/Users/David/AppData/Local/Temp/wz30f5/govuk-static-test/stylesheets/elements-page.css",
+		"/C/Users/David/AppData/Local/Temp/wz47ee/govuk-static-test/stylesheets/elements-page.css",
+		"/C/Users/David/Downloads/static_styling/elements-page.css",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/components/SiteLogin.component",
+		"/C/Users/David/AppData/Local/Temp/wzaf18/govuk-static-test/stylesheets/main.css",
+		"/C/Users/David/AppData/Local/Temp/wz8d43/govuk-static-test/stylesheets/fonts.css",
+		"/C/Users/David/AppData/Local/Temp/wz98bb/govuk-static-test/stylesheets/govuk-static-test.css",
+		"/C/Users/David/AppData/Local/Temp/wz1578/govuk-static-test/stylesheets/govuk-template.css",
+		"/C/Users/David/AppData/Local/Temp/wz254b/govuk-static-test/stylesheets/govuk-template.css",
+		"/C/Users/David/AppData/Local/Temp/wz11ac/govuk-static-test/stylesheets/elements-page.css",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/CommunitiesSelfRegConfirm.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/objects/Application_Answer__c.object",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/MyProfilePage.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_Application.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_LandingController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SIB_LandingPage.page",
+		"/C/Users/David/AppData/Local/Temp/wz3520/govuk_frontend_toolkit-master/stylesheets/_publicStylesheet.scss",
+		"/C/Users/David/AppData/Local/Temp/wzbf59/govuk_frontend_toolkit-master/stylesheets/_typography.scss",
+		"/C/Users/David/AppData/Local/Temp/wz5679/govuk_frontend_toolkit-master/stylesheets/design-patterns/_buttons.scss",
+		"/C/Users/David/Desktop/publicStylesheet",
+		"/C/Users/David/AppData/Local/Temp/wz18de/govuk_frontend_toolkit-master/stylesheets/_typography.scss",
+		"/C/Projects/Cabinet Office/Stylesheets/govuk_frontend_toolkit-master/stylesheets/design-patterns/_buttons.scss",
+		"/C/Users/David/AppData/Local/Temp/wze2e8/govuk_frontend_toolkit-master/stylesheets/design-patterns/_buttons.scss",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/config/.lightning",
+		"/C/Users/David/AppData/Roaming/Skype/My Skype Received Files/TriggerState.cls",
+		"/C/Users/David/AppData/Roaming/Skype/My Skype Received Files/TriggerContext.cls",
+		"/C/Users/David/AppData/Roaming/Skype/My Skype Received Files/TriggerHandler.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/objects/Application_Window_Template__c.object",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/objects/Application_Question_Template__c.object",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SIB_ApplicationController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/ForgotPassword.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SiteLogin.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/SiteRegister.page",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/classes/SiteRegisterController.cls",
+		"/C/workspaces/MavensMate/Cabinet Office - Dev/src/pages/CommunitiesSelfReg.page",
+		"/C/Projects/EPT/european-tour-scorer-client-westbrook/www/templates/games.html",
+		"/C/Projects/EPT/european-tour-scorer-client-westbrook/scss/_scorecard.scss",
+		"/C/Projects/EPT/european-tour-scorer-client-westbrook/scss/app.scss",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/ChangePasswordControllerTest.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/triggers/AllContactTriggers.trigger",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/ContactHelper.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_LoginController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_MainController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_ForgotPasswordController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/ForgotPasswordController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_Helper.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/SandboxDataGenerator.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Utilities.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/OpportunityHelper.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/Portal_Main.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/Portal_Login.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_AccountSettingsController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/Portal_AccountSettings.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_URLRewriter.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/Portal_ResetPassword.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_ResetPasswordController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/objects/Staff__c.object",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Portal_ResetPassword.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/objects/Scheduled_Staff__c.object",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/Portal_ForgotPassword.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/PortalLoginController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/PortalMain.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/PortalLogin.page",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/PortalMainController.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/pages/PortalMain.page-meta.xml",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/SandboxDataGeneratorTest.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/QuoteHelperTest.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/OpportunityHelperTest.cls",
+		"/C/Program Files/RealForceExplorer/workspace/common/preferences.json",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/Constants.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/triggers/AllOrderTriggers.trigger",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/OrderHelperTest.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/DataFactory.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/QuoteHelper.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/triggers/AllQuoteTriggers.trigger",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/DataSetup.cls",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/triggers/AllOpportunityTriggers.trigger",
+		"/C/workspaces/MavensMate/Spook Sandbox/src/classes/OrderHelper.cls",
+		"/C/Users/David/Downloads/ET PO Example",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_MainCtrl.cls",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_SearchResultsCtrl.cls",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_UrlRewriter.cls",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_TickerCtrl.cls",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/pages/nextgen_Main.page",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/pages/nextgen_SearchResults.page",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_UrlRewriterTest.cls",
+		"/C/workspaces/MavensMate/YouView NextGen Dev/src/classes/nextgen_MainCtrlTest.cls"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 117.0,
+		"where_history":
+		[
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src\\pages",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src\\classes",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src\\pages",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev",
+			"C:\\workspaces\\MavensMate\\Cabinet Office - Dev\\src",
+			"C:\\Projects\\EPT\\european-tour-scorer-client-westbrook",
+			"C:\\workspaces\\MavensMate\\Spook Sandbox\\src",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev\\src",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev\\src",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev\\src",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev\\src\\classes",
+			"C:\\workspaces\\MavensMate\\YouView NextGen Dev\\src",
+			"C:\\workspaces\\MavensMate\\NextGen DevBox\\src",
+			"C:\\workspaces\\MavensMate\\NextGen DevBox\\src\\classes",
+			"C:\\workspaces\\MavensMate\\NextGen DevBox\\src",
+			"C:\\workspaces\\MavensMate\\NextGen DevBox\\src\\pages"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"commissioner",
+			"commissioners",
+			"theme__",
+			"id=\"",
+			"radioAnswer",
+			"outcomeToCreate",
+			"saveAndCo",
+			"return;",
+			"previous",
+			"setanswerSu",
+			"saveCurrentSection",
+			"getApplicationCommissioners",
+			"upsertAnswer",
+			"setAdditionaLSe",
+			" + ';",
+			"change",
+			"save and come back later",
+			"formSectionVar",
+			"measure",
+			"outcomes",
+			"ac.",
+			"commissioners",
+			"prevApps",
+			"Text_Answer",
+			"setAnswer",
+			"Required__c",
+			"</td>",
+			"</tr>",
+			"<tr>",
+			"</tr>",
+			"<tr>",
+			"<b>",
+			"</b>",
+			"<b>",
+			"PrevApp",
+			"deletePrevApp",
+			"prevAppIndex",
+			"outcomeIndex",
+			"7",
+			"td",
+			"tr",
+			"<tr>",
+			"upsertAnswer",
+			"updateQuestionNumber",
+			"next",
+			"outcomeIndex",
+			"applicationOu",
+			"setOutcome",
+			"style",
+			"additionalSectionToShow",
+			"sectionWrappers[formSectionVar].aqhMap[sectionVar]",
+			"SectionWrapper",
+			"previouslyAnsweredQuestions",
+			"aqhMap",
+			"sectionWrappers[formSectionVar].aqhMap[sectionVar]",
+			"getQW",
+			"[sectionVar]",
+			"aqhMap",
+			"sectionVar",
+			"sWAnswers",
+			"'Commissioners'",
+			"Commissioners",
+			"previous",
+			"createOutcome",
+			"Outcomes",
+			"Commissioners",
+			"Outcomes",
+			"commissionerToCreate",
+			"previous",
+			"getQ",
+			"toggle",
+			"questionNumber",
+			"getqwSize",
+			"toggle",
+			"getqwSize",
+			"\t}\ngetqwSize",
+			"getqwSize",
+			"viewNewQuestion",
+			"change",
+			"updateQuestionNumber",
+			"projectName",
+			"pageBlock",
+			"toggleSection",
+			"setAnswerSubmitted",
+			"toggleSection",
+			"}');\"",
+			"theme-checkbox",
+			"resetAnswer",
+			"checkbox",
+			"&nbsp;",
+			"theme",
+			"CheckboxWrapper",
+			"regionWrapper",
+			"commissionerEmail",
+			"pageBlock",
+			"region",
+			"wrapper",
+			"\"form-group\"",
+			"generateRegionCBW",
+			"commissionerToC",
+			"question",
+			"getQuestion",
+			"sectionWrapper",
+			"getAnswerFromAQId",
+			"commissioner",
+			"checkboxesOP",
+			"radio",
+			"SectionWrapper",
+			"typeRadio",
+			"shortTextAnswer",
+			"[",
+			"get(aqtId",
+			"upsertAnswer",
+			"setRadioAnswer",
+			"setAnswer",
+			"response__c",
+			"setRadioAnswer",
+			"upsertAnswer",
+			"Single Picklist",
+			"generateCommissi",
+			"                                                    ",
+			"                                                   ",
+			"                                                  ",
+			"                                                 ",
+			"                                                ",
+			"                                               ",
+			"                                              ",
+			"                                             "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"large",
+			"'"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Cabinet Office - Prod.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"sibselfr",
+				"src\\classes\\SIB_SelfRegController.cls"
+			],
+			[
+				"sibex",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sibextens",
+				"src\\classes\\SIB_ApplicationFormExtensionTest.cls"
+			],
+			[
+				"newapp",
+				"src\\classes\\SIB_NewApplicationController.cls"
+			],
+			[
+				"sibnew",
+				"src\\classes\\SIB_NewApplicationController.cls"
+			],
+			[
+				"sibse",
+				"src\\classes\\SIB_SelfRegController.cls"
+			],
+			[
+				"communitiesself",
+				"src\\classes\\CommunitiesSelfRegController.cls"
+			],
+			[
+				"applicationex",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sib_applicationformex",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"siberror",
+				"src\\pages\\SIB_ErrorPage.page"
+			],
+			[
+				"sib_passwordcon",
+				"src\\pages\\SIB_ForgotPasswordConfirm.page"
+			],
+			[
+				"excep",
+				"src\\pages\\Exception.page"
+			],
+			[
+				"forgotpasswordcontroller",
+				"src\\classes\\ForgotPasswordController.cls"
+			],
+			[
+				"sibforg",
+				"src\\pages\\SIB_ForgotPassword.page"
+			],
+			[
+				"sib_changepassword",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"changepassword",
+				"src\\pages\\ChangePassword.page"
+			],
+			[
+				"sib_selfregcontroller",
+				"src\\classes\\SIB_SelfRegController.cls"
+			],
+			[
+				"selfre",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sibapplication",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"controller",
+				"src\\classes\\SiteLoginController.cls"
+			],
+			[
+				"sibapplicationfo",
+				"src\\pages\\SIB_ApplicationFormTest.page"
+			],
+			[
+				"sib_changepasswordcontroller",
+				"src\\classes\\SIB_ChangePasswordControllerTest.cls"
+			],
+			[
+				"sib_applicationformextension",
+				"src\\classes\\SIB_ApplicationFormExtensionTest.cls"
+			],
+			[
+				"changepassw",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"sib_template",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"templa",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"sibselfreg",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sibapplicationex",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sibapplicationlis",
+				"src\\classes\\SIB_ApplicationListController.cls"
+			],
+			[
+				"sib_selfreg",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sib_applicationlist",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"sibchan",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"sibtempl",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"sib_forgotpasswordconfirm",
+				"src\\pages\\SIB_ForgotPasswordConfirm.page"
+			],
+			[
+				"sib_applicationformextensiontest",
+				"src\\classes\\SIB_ApplicationFormExtensionTest.cls"
+			],
+			[
+				"template",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"formextens",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sibnewapp",
+				"src\\classes\\SIB_NewApplicationController.cls"
+			],
+			[
+				"sibforgot",
+				"src\\pages\\SIB_ForgotPasswordConfirm.page"
+			],
+			[
+				"sibapplicationcof",
+				"src\\pages\\SIB_ApplicationConfirm.page"
+			],
+			[
+				"sib_change",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"forgotpasswordconfirm",
+				"src\\pages\\ForgotPasswordConfirm.page"
+			],
+			[
+				"sforgotpass",
+				"src\\pages\\SIB_ForgotPassword.page"
+			],
+			[
+				"sibapplic",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sitelogincontroller",
+				"src\\classes\\SiteLoginController.cls"
+			],
+			[
+				"sibloin",
+				"src\\pages\\SIB_Login.page"
+			],
+			[
+				"sibteml",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"selfee",
+				"src\\classes\\SIB_SelfRegController.cls"
+			],
+			[
+				"sibutilities",
+				"src\\classes\\SIB_Utilities.cls"
+			],
+			[
+				"sibselre",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"changepasswordcontroller",
+				"src\\classes\\SIB_ChangePasswordController.cls"
+			],
+			[
+				"sibutili",
+				"src\\classes\\SIB_Utilities.cls"
+			],
+			[
+				"sibapplica",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"sibregtest",
+				"src\\classes\\SIB_SelfRegControllerTest.cls"
+			],
+			[
+				"datafac",
+				"src\\classes\\DataFactory.cls"
+			],
+			[
+				"sibtest",
+				"src\\classes\\SIB_UtilitiesTest.cls"
+			],
+			[
+				"sibapptest",
+				"src\\classes\\SIB_ApplicationFormExtensionTest.cls"
+			],
+			[
+				"sibuti",
+				"src\\classes\\SIB_Utilities.cls"
+			],
+			[
+				"sibcha",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"sibself",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sib_test",
+				"src\\classes\\SIB_UtilitiesTest.cls"
+			],
+			[
+				"sibselfre",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"communitiesselfregconfirmcontroller",
+				"src\\classes\\CommunitiesSelfRegConfirmController.cls"
+			],
+			[
+				"sibregcon",
+				"src\\pages\\SIB_SelfRegConfirm.page"
+			],
+			[
+				"dataf",
+				"src\\classes\\DataFactory.cls"
+			],
+			[
+				"sibapplicationforme",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sib_newapplicationcontroller",
+				"src\\classes\\SIB_NewApplicationControllerTest.cls"
+			],
+			[
+				"sibapplicationpage",
+				"src\\pages\\SIB_NewApplication.page"
+			],
+			[
+				"changepass",
+				"src\\pages\\ChangePassword.page"
+			],
+			[
+				"sib_applicationlistcontroller",
+				"src\\classes\\SIB_ApplicationListControllerTest.cls"
+			],
+			[
+				"sib_applicationconfirmcontroller",
+				"src\\classes\\SIB_ApplicationConfirmController.cls"
+			],
+			[
+				"sib_applicationconfirm",
+				"src\\pages\\SIB_ApplicationConfirm.page"
+			],
+			[
+				"sibutilitie",
+				"src\\classes\\SIB_UtilitiesTest.cls"
+			],
+			[
+				"sib_forgotpassword",
+				"src\\pages\\SIB_ForgotPassword.page"
+			],
+			[
+				"sibapplicaioncon",
+				"src\\pages\\SIB_ApplicationConfirm.page"
+			],
+			[
+				"test",
+				"src\\classes\\SIB_ChangePasswordControllerTest.cls"
+			],
+			[
+				"sibre",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sibapplicationf",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sibchange",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"changepas",
+				"src\\classes\\ChangePasswordController.cls"
+			],
+			[
+				"change",
+				"src\\classes\\ChangePasswordControllerTest.cls"
+			],
+			[
+				"changepa",
+				"src\\classes\\ChangePasswordControllerTest.cls"
+			],
+			[
+				"sibappli",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"login",
+				"src\\pages\\SIB_Login.page"
+			],
+			[
+				"selfregcon",
+				"src\\classes\\SIB_SelfRegController.cls"
+			],
+			[
+				"sibreg",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sibapplicationform",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"sib_newapplication",
+				"src\\pages\\SIB_NewApplication.page"
+			],
+			[
+				"templ",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"sib_applicationform",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"siblogin",
+				"src\\pages\\SIB_Login.page"
+			],
+			[
+				"siblist",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"siblandin",
+				"src\\pages\\SIB_Landing.page"
+			],
+			[
+				"sibapplicationli",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"sibtemplate",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"sib_login",
+				"src\\pages\\SIB_Login.page"
+			],
+			[
+				"sib_sel",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"sitelogin",
+				"src\\components\\SiteLogin.component"
+			],
+			[
+				"siapplicationform",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"sib_page",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"sibconfir",
+				"src\\pages\\SIB_SelfRegConfirm.page"
+			],
+			[
+				"sibapplicationlist",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"confirm",
+				"src\\pages\\SIB_SelfRegConfirm.page"
+			],
+			[
+				"applicationformex",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			],
+			[
+				"confirmcon",
+				"src\\classes\\SIB_ApplicationConfirmController.cls"
+			],
+			[
+				"selfref",
+				"src\\pages\\SIB_SelfRegConfirm.page"
+			],
+			[
+				"sibsel",
+				"src\\pages\\SIB_SelfReg.page"
+			],
+			[
+				"applicationlist",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"sib_list",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"sibappl",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"sibapplicationpag",
+				"src\\pages\\SIB_NewApplication.page"
+			],
+			[
+				"applicatione",
+				"src\\classes\\SIB_ApplicationExtension.cls"
+			],
+			[
+				"selfregconfi",
+				"src\\pages\\CommunitiesSelfRegConfirm.page"
+			],
+			[
+				"sibselfregcong",
+				"src\\pages\\SIB_SelfRegConfirm.page"
+			],
+			[
+				"applicationansw",
+				"src\\objects\\Application_Answer__c.object"
+			],
+			[
+				"sibtempla",
+				"src\\pages\\SIB_Template.page"
+			],
+			[
+				"page",
+				"src\\pages\\MyProfilePage.page"
+			],
+			[
+				"sib_utilities",
+				"src\\classes\\SIB_Utilities.cls"
+			],
+			[
+				"sib_cha",
+				"src\\pages\\SIB_ChangePassword.page"
+			],
+			[
+				"sib_forg",
+				"src\\pages\\SIB_ForgotPassword.page"
+			],
+			[
+				"appliationlis",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"siblanding",
+				"src\\pages\\SIB_Landing.page"
+			],
+			[
+				"sibapplicat",
+				"src\\pages\\SIB_ApplicationForm.page"
+			],
+			[
+				"sibnewappl",
+				"src\\pages\\SIB_NewApplication.page"
+			],
+			[
+				"sibpage",
+				"src\\pages\\SIB_ApplicationList.page"
+			],
+			[
+				"sib_applicationextension",
+				"src\\classes\\SIB_ApplicationExtension.cls"
+			],
+			[
+				"sib",
+				"src\\classes\\SIB_Utilities.cls"
+			],
+			[
+				"applicationfo",
+				"src\\classes\\SIB_ApplicationFormExtension.cls"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 507.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

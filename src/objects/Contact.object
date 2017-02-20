@@ -272,23 +272,6 @@
         <filterScope>Mine</filterScope>
         <label>My Contacts</label>
     </listViews>
-    <listViews>
-        <fullName>Today</fullName>
-        <columns>FULL_NAME</columns>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>CONTACT.TITLE</columns>
-        <columns>CONTACT.PHONE1</columns>
-        <columns>CONTACT.EMAIL</columns>
-        <columns>CORE.USERS.FIRST_NAME</columns>
-        <columns>CORE.USERS.LAST_NAME</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>CONTACT.CREATED_DATE</field>
-            <operation>equals</operation>
-            <value>TODAY</value>
-        </filters>
-        <label>Today</label>
-    </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypes>
         <fullName>Applicant</fullName>

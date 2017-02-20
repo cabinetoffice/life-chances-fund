@@ -1,19 +1,9 @@
 <apex:page standardStylesheets="false" showHeader="false" sidebar="false">
 	<style>
-	.betaLink{
-		color: white;
-		background-color: orange;
-	}
-	.sectionlink, .sectionlink:visited, .sectionlink:hover, .sectionlink:active {
-		color: blue;
-		text-decoration: none; 
-		font-weight: bold; 
-		padding-top: 2px; 
-		padding-bottom: 2px;
-	}
 	.longText {
 	    position: relative;
 	    width:729px;
+	    height:129px;
   	}
 	.charCount {
 	    margin: 0px;
@@ -24,21 +14,6 @@
 	    padding-right:19%;
 	    position: relative;
 	    width:729px;
-	}
-	.tableLeft{
-		width:60%;
-		color: grey;
-	}
-	.tableCenter{
-		width:40%;
-	}
-	.tableFull{
-		width:100%;
-	}
-	.tableRowHead{
-		border-top: solid ; 
-		border-top-width: 1px; 
-		padding-top:10px;
 	}
 	.topAndBottomPaddingAndBorder{
 		border-top: solid ; 
@@ -59,36 +34,23 @@
 		padding:3px;
 		text-transform: uppercase;
 	}
-	.phase-banner  {
-		@include phase-banner();
+	.nobottomborder{
+		border-bottom: 0 !important;
 	}
-	.button{
-      @include button;
-    }
+
+	.sectionlink, .sectionlink:visited, .sectionlink:hover, .sectionlink:active {
+		color: #005EA5;
+		text-decoration: none; 
+		font-weight: bold;
+	}
 	</style>
 	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
 		<head>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_conditionals.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_colours.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_css3.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_device-pixels.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_font_stack.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_grid_layout.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_helpers.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_measurements.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_shims.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_typography.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/_url-helpers.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/design-patterns/_buttons.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/design-patterns/_alpha-beta.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/design-patterns/_breadcrumbs.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/design-patterns/_buttons.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/colours/_palette.scss')}"/>
-			<apex:stylesheet value="{!URLFOR($Resource.GOVUK_Toolkit, '/govuk_frontend_toolkit-master/stylesheets/colours/_organisation.scss')}"/>
-		    <title>Welcome to GOV.UK :: Social Impact Bonds</title>
-		    <link href="https://assets.publishing.service.gov.uk/static/govuk-template-b25ed3a03b2ee8ca465a305a4f1681c3ea011f3c8d92132a6f3f4908c825cf32.css" media="screen" rel="stylesheet" type="text/css"/>
-			<link href="https://assets.publishing.service.gov.uk/static/fonts-5ff8c53913434afd0072a480d7cfca67cace4c8d03f6ef96b78a4455728ce745.css" media="all" rel="stylesheet" type="text/css"/>
-		    <link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/static-8a12287bbfbbd5578bce466aa22d77dd8767752f48ca98bf3c281463c25a240a.css"/>
+			<apex:stylesheet value="{!URLFOR($Resource.GOV_Static, '/govuk-static-test/stylesheets/elements-page.css')}"/>
+			<apex:stylesheet value="{!URLFOR($Resource.GOV_Static, '/govuk-static-test/stylesheets/govuk-template.css')}"/>
+			<apex:stylesheet value="{!URLFOR($Resource.GOV_Static, '/govuk-static-test/stylesheets/fonts.css')}"/>
+			<apex:stylesheet value="{!URLFOR($Resource.GOV_Static, '/govuk-static-test/stylesheets/main.css')}"/>
+			<title>Welcome to GOV.UK :: Social Impact Bonds</title>
 		</head>
 		<header role="banner" id="global-header" class="with-proposition">
 			<div class="header-wrapper">
@@ -104,9 +66,9 @@
 						<a href="#proposition-links" class="js-header-toggle menu">Menu</a>
 						<nav id="proposition-menu">
 							<a href='https://www.gov.uk/government/publications/life-chances-fund' id='proposition-name'>Life chances fund</a>
-							<apex:outputPanel rendered="{!$User.ProfileId != $Label.SIB_Guest_Profile}">
+							<apex:outputPanel rendered="{!$User.ProfileId != $Label.SIB_Guest_Profile && !$Site.IsPasswordExpired}">
 								<ul id="proposition-links">
-									<li><apex:outputLink value="/SIB_ChangePassword">Change Password</apex:outputLink></li>
+                                    <li><apex:outputLink value="/SIB_ChangePassword?retURL=/SIB_Login">Change Password</apex:outputLink></li>
 									<li><apex:outputLink value="{!$Site.Prefix}/secur/logout.jsp">{!$Label.site.logout}</apex:outputLink></li>
 								</ul>
 							</apex:outputPanel>
@@ -117,8 +79,8 @@
 		</header>
 		<div id="global-header-bar"/>
 		
-		<div class="phase-banner" style="max-width: 960px;margin:0 auto;">
-			<text class="betaLink"> BETA </text> This is a new service - your <a href="mailto:lifechancesfund@cabinetoffice.gov.uk" target="_blank"> feedback </a> will help us to improve it.
+		<div class="phase-banner-beta" style="max-width: 960px;margin:0 auto;">
+			<text class="phase-tag"> BETA </text> This is a new service - your <a href="mailto:lifechancesfund@cabinetoffice.gov.uk" target="_blank"> feedback</a> will help us to improve it.
 		</div>
 		<div style="max-width: 960px;margin:0 auto;">
 			<apex:insert name="body"/>

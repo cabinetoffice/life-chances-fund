@@ -13,12 +13,8 @@
         <name>ApexPage</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>Community</name>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
     </types>
     <types>
         <members>Account</members>
@@ -54,9 +50,6 @@
         <members>ForecastingOwnerAdjustment</members>
         <members>ForecastingQuota</members>
         <members>ForecastingTypeToCategory</members>
-        <members>GraphicsPackImages__mdt</members>
-        <members>GraphicsPackSettings__mdt</members>
-        <members>Graphics_Pack_Example__c</members>
         <members>Idea</members>
         <members>Lead</members>
         <members>Macro</members>
@@ -70,6 +63,7 @@
         <members>OrderItem</members>
         <members>Outcome__c</members>
         <members>PartnerRole</members>
+        <members>Previous_Application__c</members>
         <members>Pricebook2</members>
         <members>PricebookEntry</members>
         <members>Product2</members>

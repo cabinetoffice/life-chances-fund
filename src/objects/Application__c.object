@@ -148,6 +148,7 @@
         <formula>IF(
    OR(
       TEXT(Development_Form_Status__c) = &quot;Under Review&quot;, 
+      TEXT(Development_Form_Status__c) = &quot;Under Review (In Progress)&quot;, 
       TEXT(Development_Form_Status__c) = &quot;Ready for Approval&quot;
    ), &quot;Submitted&quot;, TEXT(Development_Form_Status__c)
 )</formula>
@@ -201,6 +202,7 @@
         <formula>IF(
    OR(
       TEXT(Status__c) = &quot;Under Review&quot;, 
+      TEXT(Status__c) = &quot;Under Review (In Progress)&quot;, 
       TEXT(Status__c) = &quot;Ready for Approval&quot;
    ), &quot;Submitted&quot;, TEXT(Status__c)
 )</formula>

@@ -234,6 +234,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Radio_Answer__c</fullName>
+        <externalId>false</externalId>
+        <label>Radio Answer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Response__c</fullName>
         <externalId>false</externalId>
         <formula>IF(INCLUDES(Application_Question__r.Question_Type__c, &quot;Single&quot;),
@@ -244,7 +255,8 @@ TEXT(Date_Answer__c) &amp;
 Email_Answer__c &amp;
 Multi_Picklist_Answers__c &amp;
 Picklist_Answer__c &amp;
-Short_Text_Answer__c</formula>
+Short_Text_Answer__c &amp;
+Radio_Answer__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Response</label>
         <required>false</required>

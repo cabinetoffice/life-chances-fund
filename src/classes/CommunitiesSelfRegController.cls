@@ -2,6 +2,7 @@
  * An apex page controller that supports self registration of users in communities that allow self registration
  */
 public class CommunitiesSelfRegController {
+
     public String firstName {get; set;}
     public String lastName {get; set;}
     public String email {get; set;}
@@ -30,14 +31,14 @@ public class CommunitiesSelfRegController {
         
         String userName = email;
 
-        User u = new User(
-            Username = userName,
-            Email = email,
-            FirstName = firstName,
-            LastName = lastName,
-            CommunityNickname = communityNickname,
-            ProfileId = profileId
-        );
+        User u = new User();
+        u.Username = userName;
+        u.Email = email;
+        u.FirstName = firstName;
+        u.LastName = lastName;
+        u.CommunityNickname = communityNickname;
+		u.ProfileId = profileId;
+		
         String userId;
 
         try {

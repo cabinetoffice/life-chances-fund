@@ -1,4 +1,4 @@
-<apex:page showHeader="false" standardStylesheets="false" controller="CommunitiesSelfRegConfirmController">
+<apex:page showHeader="false" standardStylesheets="false">
 	<apex:composition template="SIB_Template">
 		<apex:define name="body">
 			<br/>
@@ -7,7 +7,7 @@
 			<br/>
 			<br/>
 			<apex:form >
-				<apex:commandButton styleClass="button" value="Log in" rendered="{!$Site.LoginEnabled}"/>
+				<apex:commandLink styleClass="btn button" action="{!URLFOR($Page.SIB_Login)}" rendered="{!$Site.LoginEnabled}"> Log In </apex:commandLink>
       		</apex:form>
 			<br/>
 		</apex:define>

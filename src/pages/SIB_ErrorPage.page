@@ -1,0 +1,16 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" title="{!$Label.site.forgot_password_confirmation}">
+  <apex:composition template="SIB_Template">
+    <apex:define name="body">
+      <apex:outputPanel >
+        <apex:outputLink value="{!$Page.SIB_ApplicationList}">Back</apex:outputLink>
+      </apex:outputPanel>
+      <h2 class="heading-medium">Something has gone wrong</h2>
+      <apex:outputText escape="false" value="{!$Label.SIB_Error_Message}"/>
+      <apex:form >
+        <br/>
+        <apex:commandButton styleClass="button" action="{!URLFOR($Page.SIB_ApplicationList)}" value="Back to start page"/>
+      </apex:form>
+      <br/>
+    </apex:define>
+  </apex:composition>
+</apex:page>

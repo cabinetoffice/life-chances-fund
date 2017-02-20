@@ -47,66 +47,63 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Controls whether a theme is accepting applications</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
-    <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
-    <enableReports>true</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
-        <fullName>End_Date__c</fullName>
+        <fullName>Application__c</fullName>
         <externalId>false</externalId>
-        <label>End Date</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>DateTime</type>
-    </fields>
-    <fields>
-        <fullName>Is_Live__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Is Live</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>Start_Date__c</fullName>
-        <externalId>false</externalId>
-        <label>Start Date</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>DateTime</type>
-    </fields>
-    <fields>
-        <fullName>Theme__c</fullName>
-        <externalId>false</externalId>
-        <label>Theme</label>
-        <referenceTo>Theme__c</referenceTo>
-        <relationshipLabel>Application Windows</relationshipLabel>
-        <relationshipName>Application_Windows</relationshipName>
+        <label>Application</label>
+        <referenceTo>Application__c</referenceTo>
+        <relationshipLabel>Previous Applications</relationshipLabel>
+        <relationshipName>Previous_Applications</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
-    <label>Application Window</label>
-    <listViews>
-        <fullName>All</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
+    <fields>
+        <fullName>Not_Successful_Reasons__c</fullName>
+        <externalId>false</externalId>
+        <label>Not Successful Reasons</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Was_It_Successful__c</fullName>
+        <externalId>false</externalId>
+        <label>Was It Successful</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Previous Application</label>
     <nameField>
-        <label>Application Window Name</label>
+        <label>Previous Application Number</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Application Windows</pluralLabel>
+    <pluralLabel>Previous Applications</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
-    <startsWith>Vowel</startsWith>
 </CustomObject>

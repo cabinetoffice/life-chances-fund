@@ -1,6 +1,3 @@
-/**
-* An apex page controller that supports self registration of users in communities that allow self registration
-*/
 public class SIB_SelfRegController {
 	public String firstName {get; set;}
 	public String lastName {get; set;}
@@ -8,12 +5,13 @@ public class SIB_SelfRegController {
 	public String organisationName{get; set;}
 	public String orgTypeOther{get;set;}
 	public String typeSelected{get;set;}
-	public List<String> themesSelected{get;set;}
 	public Integer pageNumber{get;set;}
 	public List<CheckboxWrapper> regionsCBW{get;set;}
 	public List<CheckboxWrapper> themesCBW{get;set;}
+	public Map<String, String> orgTypeMap{get;set;}
 
 	public SIB_SelfRegController() {
+		orgTypeMap = new Map<String, String>();
 		pageNumber = 1;
 		regionsCBW = generateRegionCBW();
 		themesCBW = generateThemeCBW();
@@ -32,8 +30,6 @@ public class SIB_SelfRegController {
 		for(CheckboxWrapper region : regionsCBW){
 			regionSelected += region.isSelected ? (region.checkBoxName + ';') : '';
 		}
-
-		String userName = email;
 		Account accountToCreate = new Account(
 			Name = organisationName,
 			Type = typeSelected,
@@ -41,12 +37,17 @@ public class SIB_SelfRegController {
 			Organisation_Type_Details__c = orgTypeOther,
 			OwnerId = ownerId
 		);
+		
+		//Fix to null "Ending position out of bounds" on email addresses less than 40 characters
+		Integer subStringToGet = email.length() < 40 ? email.length() : 39;
+		// SIB-222
+		String commNickName = email.substring(0,subStringToGet);
 		User u = new User(
-			Username = userName,
+			Username = email,
 			Email = email,
 			FirstName = firstName,
 			LastName = lastName,
-			CommunityNickname = email,
+			CommunityNickname = commNickName, // SIB-222 - Was previously email
 			ProfileId = profileId
 		);
 		String userId;
@@ -109,11 +110,14 @@ public class SIB_SelfRegController {
 		}
 	}
 
-	public List<SelectOption> types{
+	public List<String> types{
 		get{
-			List<SelectOption> options = new List<SelectOption>();
+			List<String> options = new List<String>();
+			orgTypeMap = new Map<String, String>();
 			for(Schema.PicklistEntry picklistOption : Account.Type.getDescribe().getPicklistValues()){
-				options.add(new SelectOption(picklistOption.getLabel(), picklistOption.getValue()));
+				String label = picklistOption.getLabel();
+				orgTypeMap.put(label, label.replace('\'', '\\\''));
+				options.add(label);
 			}
 			return options;
 		}
@@ -132,6 +136,7 @@ public class SIB_SelfRegController {
 		for(Theme__c theme : [
 			SELECT Name, Id
 			FROM Theme__c
+			ORDER BY CreatedDate
 		]){
 			cbwList.add(new CheckBoxWrapper(theme.Name, theme.Id));
 		}
@@ -144,13 +149,14 @@ public class SIB_SelfRegController {
 			for(Theme__c theme : [
 				SELECT Name, Id
 				FROM Theme__c
+				ORDER BY CreatedDate
 			]){
 				options.add(new SelectOption(theme.Id, theme.Name));
 			}
 			return options;
 		}
 	}
-
+	
 	private Boolean isValidRegistrationForm(){
 		Boolean isValidForm = true;
 		if (String.isBlank(organisationName)) {
@@ -178,11 +184,34 @@ public class SIB_SelfRegController {
 		return [
 			SELECT Id
 			FROM User
-			WHERE CommunityNickname = :email
+			WHERE email = :email // SIB-222 - previously matching on the field nickname on the user object
 		];
 	}
 
 	public void nextPage(){
+		 // SIB-226
+		if(pageNumber==1){  
+			if(String.isBlank(email)){
+				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please add email'));
+				return;
+			}              
+			if(!SIB_Utilities.isValidEmail(email)){
+				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please enter a valid email address'));
+				return;
+			}
+			// SIB-236
+			if (String.isBlank(organisationName)) {
+				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please add Organisation Name'));
+				return;
+			}
+		}
+		
+		if(pageNumber==2){
+			if(typeSelected == 'Other' && String.isBlank(orgTypeOther)){
+				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please fill out \'If you chose other, please explain\' if you selected \'Other\' for organisation type'));
+				return;
+			}
+		}
 		updatePageNumber(1);
 	}
 
@@ -195,14 +224,18 @@ public class SIB_SelfRegController {
 	}
 
 	public class CheckBoxWrapper{
-        public String checkBoxName{get;set;}
-        public Id checkBoxId{get;set;}
-        public Boolean isSelected{get;set;}
+		public String checkBoxName{get;set;}
+		public Id checkBoxId{get;set;}
+		public Boolean isSelected{get;set;}
 
-        public CheckBoxWrapper(String checkBoxName, Id checkBoxId){
-            this.checkBoxName = checkBoxName;
-            this.checkBoxId = checkBoxId;
-            this.isSelected = false;
-        }
-    }
+		public CheckBoxWrapper(String checkBoxName, Id checkBoxId){
+			this.checkBoxName = checkBoxName;
+			this.checkBoxId = checkBoxId;
+			this.isSelected = false;
+		}
+	}
+
+	public void setRadioAnswer(){
+		typeSelected = EncodingUtil.urlDecode(ApexPages.currentPage().getParameters().get('selectedType'), 'UTF-8');
+	}
 }
