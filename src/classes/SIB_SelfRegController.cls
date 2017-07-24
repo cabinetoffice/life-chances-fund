@@ -6,28 +6,39 @@ public class SIB_SelfRegController {
 	public String orgTypeOther{get;set;}
 	public String typeSelected{get;set;}
 	public Integer pageNumber{get;set;}
-	public List<CheckboxWrapper> regionsCBW{get;set;}
-	public List<CheckboxWrapper> themesCBW{get;set;}
+	public Map<String, List<CheckboxWrapper>> nameToCBW{get;set;}
 	public Map<String, String> orgTypeMap{get;set;}
 
+	/*
+		Page load methods:
+			pageNumber being set to 1 to allow start page to be shown
+			Generating the checkbox wrappers 
+	*/
 	public SIB_SelfRegController() {
 		orgTypeMap = new Map<String, String>();
 		pageNumber = 1;
-		regionsCBW = generateRegionCBW();
-		themesCBW = generateThemeCBW();
+		nameToCBW = new Map<String, List<CheckboxWrapper>>{
+			'regions' => generateRegionCBW(),
+			'themes' => generateThemeCBW()
+		};
 	}
 
+	/*
+		Method used to create user.
+		Returns a page reference (null if there is any errors, else SelfRegConfirm)
+	*/
 	public PageReference registerUser() {
-		if(!isValidRegistrationForm()){
+		if(usersWithNickname().size() != 0){
+			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'This email has already been used to register on the community.'));
 			return null;
 		}
-
+		//These should at some point be updated to the correct Ids, as we are hardcoding the owner :|
 		String profileId = [SELECT Id FROM Profile WHERE Name = 'SIB Applicant'].Id;
 		String ownerId = [SELECT Id FROM User WHERE Name = 'Westbrook Admin'].Id;
 		String accountId = '';
 
 		String regionSelected = '';
-		for(CheckboxWrapper region : regionsCBW){
+		for(CheckboxWrapper region : nameToCBW.get('regions')){
 			regionSelected += region.isSelected ? (region.checkBoxName + ';') : '';
 		}
 		Account accountToCreate = new Account(
@@ -37,7 +48,6 @@ public class SIB_SelfRegController {
 			Organisation_Type_Details__c = orgTypeOther,
 			OwnerId = ownerId
 		);
-		
 		//Fix to null "Ending position out of bounds" on email addresses less than 40 characters
 		Integer subStringToGet = email.length() < 40 ? email.length() : 39;
 		// SIB-222
@@ -62,7 +72,7 @@ public class SIB_SelfRegController {
 		}
 		List<Theme_Interest__c> themeInterestsToInsert = new List<Theme_Interest__c>();
 
-		for(CheckBoxWrapper theme : themesCBW){
+		for(CheckBoxWrapper theme : nameToCBW.get('themes')){
 			if(theme.isSelected){
 				themeInterestsToInsert.add(
 					new Theme_Interest__c(
@@ -81,6 +91,9 @@ public class SIB_SelfRegController {
 				return null;
 			}
 		}
+		/*
+			Try catch on standard "Site.createExternalUser" method as per best practices. 
+		*/
 		try {
 			userId = Site.createExternalUser(u, accountId);
 		} catch(Site.ExternalUserCreateException ex) {
@@ -88,26 +101,12 @@ public class SIB_SelfRegController {
 			for (String error : errors)  {
 				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, ex.getMessage()));
 			}
-			System.debug(ex.getMessage());
 			Database.rollback(rollBackPoint);
+			return null;
 		}
-
-		if (userId != null) {
-			PageReference page = System.Page.SIB_SelfRegConfirm;
-			page.setRedirect(true);
-			return page;
-		}
-		return null;
-	}
-
-	public List<SelectOption> regions{
-		get{
-			List<SelectOption> options = new List<SelectOption>();
-			for(Schema.PicklistEntry picklistOption : Account.Organisation_Region__c.getDescribe().getPicklistValues()){
-				options.add(new SelectOption(picklistOption.getLabel(), picklistOption.getValue()));
-			}
-			return options;
-		}
+		PageReference page = System.Page.SIB_SelfRegConfirm;
+		page.setRedirect(true);
+		return page;
 	}
 
 	public List<String> types{
@@ -143,43 +142,6 @@ public class SIB_SelfRegController {
 		return cbwList;
 	}
 
-	public List<SelectOption> themes{
-		get{
-			List<SelectOption> options = new List<SelectOption>();
-			for(Theme__c theme : [
-				SELECT Name, Id
-				FROM Theme__c
-				ORDER BY CreatedDate
-			]){
-				options.add(new SelectOption(theme.Id, theme.Name));
-			}
-			return options;
-		}
-	}
-	
-	private Boolean isValidRegistrationForm(){
-		Boolean isValidForm = true;
-		if (String.isBlank(organisationName)) {
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please add Organisation Name'));
-			isValidForm = false;
-		}
-		if (String.isBlank(email)) {
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please add email'));
-			isValidForm = false;
-		} else if (!SIB_Utilities.isValidEmail(email)) {
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please enter a valid email address'));
-			isValidForm = false;
-		} else if(usersWithNickname().size() != 0){
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'This email has already been used to register on the community.'));
-			isValidForm = false;
-		}
-		if(typeSelected == 'Other' && String.isBlank(orgTypeOther)){
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please fill out \'If you chose other, please explain\' if you selected \'Other\' for organisation type'));
-			isValidForm = false;
-		}
-		return isValidForm;
-	}
-
 	private List<User> usersWithNickname(){
 		return [
 			SELECT Id
@@ -205,7 +167,6 @@ public class SIB_SelfRegController {
 				return;
 			}
 		}
-		
 		if(pageNumber==2){
 			if(typeSelected == 'Other' && String.isBlank(orgTypeOther)){
 				ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please fill out \'If you chose other, please explain\' if you selected \'Other\' for organisation type'));

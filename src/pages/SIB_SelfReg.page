@@ -58,7 +58,7 @@
 						<apex:outputPanel rendered="{!pageNumber == 3}">
 							<h2 class="heading-medium"> Where is your organisation based?  </h2>
 							<div class="form-group">
-								<apex:repeat value="{!regionsCBW}" var="region" >
+								<apex:repeat value="{!nameToCBW['regions']}" var="region" >
 									<label class="block-label selection-button-checkbox" for="theme-checkbox">
 										<apex:inputCheckbox id="theme-checkbox" value="{!region.isSelected}"/>
 										{!region.checkboxName}
@@ -71,7 +71,7 @@
 							<h2 class="heading-medium">Which themes are you interested in? </h2>
 							<p>Please select all that apply</p>
 							<div class="form-group">
-								<apex:repeat value="{!themesCBW}" var="theme" >
+								<apex:repeat value="{!nameToCBW['themes']}" var="theme" >
 									<label class="block-label selection-button-checkbox" for="theme-checkbox">
 										<apex:inputCheckbox id="theme-checkbox" value="{!theme.isSelected}"/>
 										{!theme.checkboxName}

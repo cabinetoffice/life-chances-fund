@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -49,6 +45,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>true</enableFeeds>
     <enableHistory>false</enableHistory>
@@ -74,26 +71,31 @@
         <fullName>Application_Stage__c</fullName>
         <externalId>false</externalId>
         <label>Application Stage</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Expression of Interest</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Full Application</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Live Project</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Expression of Interest</fullName>
+                    <default>true</default>
+                    <label>Expression of Interest</label>
+                </value>
+                <value>
+                    <fullName>Full Application</fullName>
+                    <default>false</default>
+                    <label>Full Application</label>
+                </value>
+                <value>
+                    <fullName>Live Project</fullName>
+                    <default>false</default>
+                    <label>Live Project</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Application_Window_Template__c</fullName>
@@ -163,38 +165,46 @@
         <fullName>Development_Form_Status__c</fullName>
         <externalId>false</externalId>
         <label>Dev Form Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Draft</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Under review (In progress)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Ready for Approval</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Successful</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Unsuccessful</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>false</default>
+                    <label>Draft</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Under review (In progress)</fullName>
+                    <default>false</default>
+                    <label>Under review (In progress)</label>
+                </value>
+                <value>
+                    <fullName>Ready for Approval</fullName>
+                    <default>false</default>
+                    <label>Ready for Approval</label>
+                </value>
+                <value>
+                    <fullName>Successful</fullName>
+                    <default>false</default>
+                    <label>Successful</label>
+                </value>
+                <value>
+                    <fullName>Unsuccessful</fullName>
+                    <default>false</default>
+                    <label>Unsuccessful</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>EOI_External_Status__c</fullName>
@@ -212,6 +222,130 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Full_Application_External_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+   OR(
+      TEXT(Full_Application_Status__c) = &quot;Under Review&quot;, 
+      TEXT(Full_Application_Status__c) = &quot;Under Review (In Progress)&quot;, 
+      TEXT(Full_Application_Status__c) = &quot;Ready for Approval&quot;
+   ), &quot;Submitted&quot;, TEXT(Full_Application_Status__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Full Application External Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Full_Application_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Full Application Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>false</default>
+                    <label>Draft</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Under review (In progress)</fullName>
+                    <default>false</default>
+                    <label>Under review (In progress)</label>
+                </value>
+                <value>
+                    <fullName>Ready for Approval</fullName>
+                    <default>false</default>
+                    <label>Ready for Approval</label>
+                </value>
+                <value>
+                    <fullName>Successful</fullName>
+                    <default>false</default>
+                    <label>Successful</label>
+                </value>
+                <value>
+                    <fullName>Unsuccessful</fullName>
+                    <default>false</default>
+                    <label>Unsuccessful</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Identity_Check_External_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( 
+OR( 
+TEXT( Identity_Check_Status__c ) = &quot;Under Review&quot;, 
+TEXT(Identity_Check_Status__c) = &quot;Under Review (In Progress)&quot;, 
+TEXT(Identity_Check_Status__c) = &quot;Ready for Approval&quot; 
+), &quot;Submitted&quot;, TEXT(Identity_Check_Status__c) 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Financial health External Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Identity_Check_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Health and Fraud Prevention</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>false</default>
+                    <label>Draft</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Under review (In progress)</fullName>
+                    <default>false</default>
+                    <label>Under review (In progress)</label>
+                </value>
+                <value>
+                    <fullName>Ready for Approval</fullName>
+                    <default>false</default>
+                    <label>Ready for Approval</label>
+                </value>
+                <value>
+                    <fullName>Successful</fullName>
+                    <default>false</default>
+                    <label>Successful</label>
+                </value>
+                <value>
+                    <fullName>Unsuccessful</fullName>
+                    <default>false</default>
+                    <label>Unsuccessful</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Is_Submitted__c</fullName>
@@ -262,38 +396,46 @@
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>EOI Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Draft</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Under review (In progress)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Ready for Approval</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Successful</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Unsuccessful</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>true</default>
+                    <label>Draft</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Under review (In progress)</fullName>
+                    <default>false</default>
+                    <label>Under review (In progress)</label>
+                </value>
+                <value>
+                    <fullName>Ready for Approval</fullName>
+                    <default>false</default>
+                    <label>Ready for Approval</label>
+                </value>
+                <value>
+                    <fullName>Successful</fullName>
+                    <default>false</default>
+                    <label>Successful</label>
+                </value>
+                <value>
+                    <fullName>Unsuccessful</fullName>
+                    <default>false</default>
+                    <label>Unsuccessful</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Theme__c</fullName>
@@ -312,7 +454,7 @@
         <columns>NAME</columns>
         <columns>Application_Window_Template__c</columns>
         <columns>Contact__c</columns>
-        <columns>Status__c</columns>
+        <columns>Application_Stage__c</columns>
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
@@ -330,6 +472,30 @@
             <value>Nithya</value>
         </filters>
         <label>Applications - Assigned to me</label>
+    </listViews>
+    <listViews>
+        <fullName>Early_Years</fullName>
+        <columns>NAME</columns>
+        <columns>Organisation_Name__c</columns>
+        <columns>Contact__c</columns>
+        <columns>Contact_Email__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Theme__c</field>
+            <operation>equals</operation>
+            <value>Early Years</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </filters>
+        <label>Early Years</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>Submitted</fullName>
@@ -356,7 +522,7 @@
     <searchLayouts>
         <customTabListAdditionalFields>Application_Window_Template__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Contact__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Application_Stage__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
@@ -412,6 +578,7 @@ NOT(ISCHANGED(Reviewer__c )))</errorConditionFormula>
 ISPICKVAL( Status__c , &quot;Unsuccessful&quot;))</errorConditionFormula>
         <errorMessage>Only Admin Users can set an Application to Successful or Unsuccessful</errorMessage>
     </validationRules>
+    <visibility>Public</visibility>
     <webLinks>
         <fullName>Edit_Application_Applicant</fullName>
         <availability>online</availability>

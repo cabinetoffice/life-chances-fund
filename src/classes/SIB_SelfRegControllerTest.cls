@@ -8,9 +8,9 @@ private class SIB_SelfRegControllerTest {
 	static testMethod void pageNumberTesting() {
 		SIB_SelfRegController controller = new SIB_SelfRegController();
 		System.assertEquals(1, controller.pageNumber);
-		System.assertEquals(1, controller.themes.size());
+		System.assertEquals(1, controller.nameToCBW.get('themes').size());
 		System.assertNotEquals(0, controller.types.size());
-		System.assertNotEquals(0, controller.regions.size());
+		System.assertNotEquals(0, controller.nameToCBW.get('regions').size());
 
 		//Testing nextPage method on page 1
 		controller.nextPage();
@@ -43,18 +43,13 @@ private class SIB_SelfRegControllerTest {
 		controller.firstName = 'First';
 		controller.lastName = 'Last';
 		controller.typeSelected = 'Other';
-		System.assertEquals(null, controller.registerUser());
-		System.assertEquals(3, ApexPages.getMessages().size());
+		controller.organisationName = 'Testing';
 		//Using this so we can check that a user has already been used with this email address;
 		controller.email = UserInfo.getUserEmail();
 		controller.registerUser();
-		System.assertEquals(4, ApexPages.getMessages().size());
-		System.assertEquals('This email has already been used to register on the community.', ApexPages.getMessages()[3].getDetail());
-		controller.email = 'test';
-		controller.themesCBW[0].isSelected = true;
-		controller.registerUser();
-		System.assertEquals(5, ApexPages.getMessages().size());
-		System.assertEquals('Please enter a valid email address', ApexPages.getMessages()[4].getDetail());
+		System.assertEquals(1, ApexPages.getMessages().size());
+		System.assertEquals('This email has already been used to register on the community.', ApexPages.getMessages()[0].getDetail());
+		controller.nameToCBW.get('themes')[0].isSelected = true;
 		controller.email = 'testtesttesttesttesttesttest@test.com';
 		controller.typeSelected = 'Different';
 		controller.organisationName = 'Test Org';

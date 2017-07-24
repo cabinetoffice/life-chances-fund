@@ -6,7 +6,7 @@ private class SIB_UtilitiesTest {
 		Application_Window__c aw = DataFactory.insertAW(theme.Id);
 		Application_Window_Template__c awt = DataFactory.insertAWT(aw.Id);
 		Application_Form_Section__c afs = DataFactory.insertAFS('Test Section', 'Expression of Interest');
-		Application_Question__c aq = DataFactory.insertAQ('FirstName', 'Short_Text_Answer__c');
+		Application_Question__c aq = DataFactory.insertAQ('First Name', 'Short Text', 'FirstName', 'Short_Text_Answer__c', '', '1');
 		Application_Question_Template__c aqt = DataFactory.insertAQT(awt.Id, aq.Id, afs.Id);
 	}
 
@@ -15,7 +15,7 @@ private class SIB_UtilitiesTest {
 		System.assertEquals(false, SIB_Utilities.isValidEmail('test@test'));
 		System.assertEquals(true, SIB_Utilities.isValidEmail('test@test.com'));
 		System.assertNotEquals(null, SIB_Utilities.getRecordTypeId('Contact', 'Commissioner'));
-		System.assertEquals(Site.getBaseUrl(), SIB_Utilities.returnHomePage().getURL());
+		System.assertEquals(Page.SIB_Login.getURL(), SIB_Utilities.returnHomePage().getURL());
 		System.assertEquals('Id', SIB_Utilities.generateDefaultFields(null));
 		System.assertEquals(null, SIB_Utilities.checkLoggedInStatus());
 		Application_Window_Template__c awt = [
@@ -24,5 +24,6 @@ private class SIB_UtilitiesTest {
 			LIMIT 1
 		];
 		System.assertEquals('FirstName,Id', SIB_Utilities.generateDefaultFields(awt.Id));
+        SIB_Utilities.returnHomePage();
 	}
 }

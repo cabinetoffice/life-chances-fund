@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -120,49 +116,6 @@
     </fields>
     <fields>
         <fullName>LeadSource</fullName>
-        <picklist>
-            <picklistValues>
-                <fullName>Advertisement</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Customer Event</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Employee Referral</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Google AdWords</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Partner</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Purchased List</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Trade Show</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Webinar</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Website</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -171,33 +124,40 @@
         <fullName>Loss_Reason__c</fullName>
         <externalId>false</externalId>
         <label>Loss Reason</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Lost to Competitor</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>No Budget / Lost Funding</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>No Decision / Non-Responsive</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Price</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Lost to Competitor</fullName>
+                    <default>false</default>
+                    <label>Lost to Competitor</label>
+                </value>
+                <value>
+                    <fullName>No Budget / Lost Funding</fullName>
+                    <default>false</default>
+                    <label>No Budget / Lost Funding</label>
+                </value>
+                <value>
+                    <fullName>No Decision / Non-Responsive</fullName>
+                    <default>false</default>
+                    <label>No Decision / Non-Responsive</label>
+                </value>
+                <value>
+                    <fullName>Price</fullName>
+                    <default>false</default>
+                    <label>Price</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Name</fullName>
@@ -241,63 +201,6 @@
     </fields>
     <fields>
         <fullName>StageName</fullName>
-        <picklist>
-            <picklistValues>
-                <fullName>Qualification</fullName>
-                <default>false</default>
-                <description>You&apos;ve contacted the prospect and they&apos;re interested.</description>
-                <closed>false</closed>
-                <forecastCategory>Pipeline</forecastCategory>
-                <probability>10</probability>
-                <won>false</won>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Needs Analysis</fullName>
-                <default>false</default>
-                <description>You&apos;re defining the prospect&apos;s needs.</description>
-                <closed>false</closed>
-                <forecastCategory>Pipeline</forecastCategory>
-                <probability>35</probability>
-                <won>false</won>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Proposal</fullName>
-                <default>false</default>
-                <description>You&apos;re developing a sales proposal for the prospect.</description>
-                <closed>false</closed>
-                <forecastCategory>BestCase</forecastCategory>
-                <probability>75</probability>
-                <won>false</won>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Negotiation</fullName>
-                <default>false</default>
-                <description>You&apos;re working with the prospect on the proposal you delivered.</description>
-                <closed>false</closed>
-                <forecastCategory>Forecast</forecastCategory>
-                <probability>90</probability>
-                <won>false</won>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Closed Won</fullName>
-                <default>false</default>
-                <description>Sold!</description>
-                <closed>true</closed>
-                <forecastCategory>Closed</forecastCategory>
-                <probability>100</probability>
-                <won>true</won>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Closed Lost</fullName>
-                <default>false</default>
-                <description>No sale.</description>
-                <closed>true</closed>
-                <forecastCategory>Omitted</forecastCategory>
-                <probability>0</probability>
-                <won>false</won>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <trackFeedHistory>true</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -315,17 +218,6 @@
     </fields>
     <fields>
         <fullName>Type</fullName>
-        <picklist>
-            <picklistValues>
-                <fullName>Existing Business</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>New Business</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>

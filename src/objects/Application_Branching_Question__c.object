@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -50,6 +46,7 @@
     <description>This object will be used to direct an applicant to the correct question based on the answer they have given on specific branching questions.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
@@ -111,6 +108,14 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Application Branching Question</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Application_Question__c</columns>
+        <columns>Answer__c</columns>
+        <columns>Template__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <displayFormat>ABQ-{000000}</displayFormat>
         <label>Application Branching Question Number</label>
@@ -120,4 +125,5 @@
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
 </CustomObject>

@@ -1,24 +1,34 @@
 public with sharing class SIB_NewApplicationController {
     public String selectedTheme{get;set;}
-    public List<String> themes {get;set;}
     public Map<String, Id> themeNameToIdMap{get;set;}
     
+    //As with all the pages where we require a user to be logged in, we check here if the user is logged in, else return the homepage
+    public PageReference checkLoggedInStatus(){
+        return SIB_Utilities.checkLoggedInStatus();
+    }
+    /*
+        Loading up controller, getting all possible themes. Generating the map so we can display the repeater.
+    */
     public SIB_NewApplicationController() {
         themeNameToIdMap = new Map<String, Id>();
-        themes = new List<String>();
         for(Theme__c theme : [
             SELECT Name, Id
             FROM Theme__c
         ]){
             themeNameToIdMap.put(theme.Name, theme.Id);
-            themes.add(theme.Name);
         }
     }
-
+    // Sets the selected theme.
     public void setValue(){
         selectedTheme = EncodingUtil.urlDecode(ApexPages.currentPage().getParameters().get('valueToSet'), 'UTF-8');
     }
 
+    /*
+        Method which creates an application. 
+        It finds all application windows for the selected theme, loops through them, then finds one that is live or starts in the future
+        and then creates the application, relates it to the contact and makes it a draft.
+        It then forwards the user onto the expression of interest form.
+    */
     public PageReference startApplication(){
         Application_Window__c applicationWindow = null;
         List<Application_Window__c> appWindows = [
@@ -43,10 +53,6 @@ public with sharing class SIB_NewApplicationController {
             Contact__c = contactRecords.isEmpty() ? null : contactRecords[0].Id
         );
         insert applicationToCreate;
-        return new PageReference('/apex/SIB_ApplicationForm?id=' + applicationToCreate.Id + '&formType=Expression%20Of%20Interest');
-    }
-
-    public PageReference checkLoggedInStatus(){
-        return SIB_Utilities.checkLoggedInStatus();
+        return new PageReference('/apex/SIB_ApplicationForm?id=' + applicationToCreate.Id + '&formType=Financial%20health%20and%20fraud%20prevention');
     }
 }

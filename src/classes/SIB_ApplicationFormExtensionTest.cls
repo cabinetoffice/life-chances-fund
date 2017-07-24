@@ -1,205 +1,312 @@
 @isTest
 private class SIB_ApplicationFormExtensionTest {
-	
 	@testSetup static void initData(){
-		Theme__c theme = DataFactory.insertTheme('Test Theme');
-		Application_Window__c aw = DataFactory.insertAW(theme.Id);
-		Application_Window_Template__c awt = DataFactory.insertAWT(aw.Id);
-		Application_Form_Section__c afs = DataFactory.insertAFS('Test Section', 'Expression of Interest');
-		Application_Question__c aq = DataFactory.insertAQ('FirstName', 'Short_Text_Answer__c');
-		Application_Question_Template__c aqt = DataFactory.insertAQT(awt.Id, aq.Id, afs.Id);
-		Contact applicant = DataFactory.insertContact(UserInfo.getUserEmail());
-		Application__c app = DataFactory.insertApplication(awt.Id, applicant.Id, 'Draft');
+		DataFactory.setUpFullApplication();
 	}
 
-	static testMethod void positiveTesting() {
+	static testMethod void initialiseDataTesting() {
 		SIB_ApplicationFormExtension controller = new SIB_ApplicationFormExtension();
-		Application__c appToUse = [
+		Application__c appToUse = getCurrentApplication();
+		ApexPages.currentPage().getParameters().put('Id', appToUse.Id);
+		ApexPages.currentPage().getParameters().put('formType', 'Expression+Of+Interest');   
+        System.debug('URL:'+Page.SIB_ApplicationList.getUrl());
+		//System.assertEquals(Page.SIB_ApplicationList.getUrl(), controller.initialiseData().getURL());
+        System.debug('Theme:'+ApexPages.currentPage().getParameters().get('formType'));
+		PageReference pr = controller.initialiseData();
+		System.assertEquals(null, pr);
+		System.assertEquals('Expression of interest application', controller.formDisplayName);
+		System.assertEquals(0, controller.getHighestPageNumber());
+		System.assertEquals(3, controller.objectNameToRecords.keySet().size());
+		System.assertEquals('Status__c', controller.statusField);
+		System.assertEquals('Draft', controller.currApp.get(controller.statusField));
+		System.assertEquals(0, controller.branchQuestionMap.keySet().size());
+		System.assertEquals(false, controller.disable);
+		System.assertEquals(0, controller.getSWAnswers().keySet().size());
+		controller.currApp.put(controller.statusField, 'Submitted');
+		update controller.currApp;
+		controller.initialiseData();
+		System.assertEquals(true, controller.disable);
+		controller.currApp.put(controller.statusField, 'Draft');
+		update controller.currApp;
+		controller.initialiseData();
+		controller.viewAllAnswers();
+		System.assertEquals(controller.formSection, 'ALL_QUESTIONS');
+		System.assertEquals(8, controller.getSWAnswers().keySet().size());
+		System.assertEquals(controller.additionalSectionToShow, 'Section Summary');
+		System.assertEquals(controller.pageNumber, null);
+		controller.previous();
+		System.assertEquals(controller.formSection, '');
+		System.assertEquals(controller.additionalSectionToShow, '');
+		controller.additionalSectionToShow = 'Section Summary';
+		controller.setFormSection();
+		System.assertEquals('', controller.additionalSectionToShow);
+		controller.getQWS();
+		System.assertEquals(false, controller.hasNext);
+		System.assertEquals(false, controller.hasPrevious);
+		ApexPages.currentPage().getParameters().put('formSectionHeader', '1. Lead Contact');
+		controller.setFormSection();
+		System.assertEquals('1. Lead Contact', controller.formSection);
+		System.assertEquals(5, controller.questionHolders.size());
+		ApexPages.currentPage().getParameters().put('pageNumber', '1');
+		controller.setPageNumber();
+		System.assertEquals(1, controller.pageNumber);
+		System.assertEquals(false, controller.hasPrevious);
+		System.assertEquals(4, controller.getHighestPageNumber());
+		controller.previous();
+		System.assertEquals(null, controller.pageNumber);
+		ApexPages.currentPage().getParameters().put('pageNumber', '4');
+		controller.setPageNumber();
+		System.assertEquals(false, controller.displayQuestionHelpText);
+		controller.toggleDisplayQuestionHelpText();
+		System.assertEquals(true, controller.displayQuestionHelpText);
+		controller.saveAndContinue();
+		System.assertEquals(false, controller.displayQuestionHelpText);
+		System.assertEquals(null, controller.pageNumber);
+		System.assertEquals('Section Summary', controller.additionalSectionToShow);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 4);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 3);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 2);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 1);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, null);
+		System.assertEquals('1. Lead Contact', controller.formSection);
+		System.assertEquals(1, controller.getSWAnswers().keySet().size());
+		controller.previous();
+		System.assertEquals('', controller.formSection);
+		ApexPages.currentPage().getParameters().put('sObjectType', 'Application_Commissioner__c');
+		controller.generateSObject();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.nextSubPage();
+		System.assertEquals(controller.subPageNumber, 2);
+		controller.previous();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.previous();
+		System.assertEquals(null, controller.subPageNumber);
+		controller.pageNumber = 3;
+		System.assertEquals(0, controller.getSObjectSize());
+		ApexPages.currentPage().getParameters().put('formSectionHeader', '6. Commissioners');
+		controller.setFormSection();
+		controller.saveAndContinue();
+		System.assertEquals('application commissioner', controller.getSObjectLabel().toLowerCase());
+		controller.generateSObject();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.saveSObject();
+		System.assertEquals(1, controller.getSObjectSize());
+		System.assertEquals(null, controller.subPageNumber);
+		System.assertEquals(null, controller.sObjectToCreate);
+		ApexPages.currentPage().getParameters().put('pageNumber', '1');
+		ApexPages.currentPage().getParameters().put('subPageNumber', '1');
+		ApexPages.currentPage().getParameters().put('sObjectNumber', '0');
+		ApexPages.currentPage().getParameters().put('sObjectName', 'Application_Commissioner__c');
+		controller.setPageNumber();
+		System.assertNotEquals(null, controller.sObjectToCreate);
+		System.assertEquals(1, controller.subPageNumber);
+		System.assertEquals(Page.SIB_ApplicationList.getURL(), controller.returnHomePage().getURL());
+		Application_Question_Template__c randomAQT = [
+			SELECT Application_Question__r.Id, Id
+			FROM Application_Question_Template__c
+			WHERE Application_Form_Section__r.Name = '6. Commissioners'
+			LIMIT 1
+		];
+		controller.formSection = '6. Commissioners';
+		System.assertEquals('', controller.getAnswerFromAQId(randomAQT.Application_Question__r.Id));
+		ApexPages.currentPage().getParameters().put('answerType', 'Short_Text_Answer__c');
+		ApexPages.currentPage().getParameters().put('answerToSet', 'Testing');
+		ApexPages.currentPage().getParameters().put('aqtId', randomAQT.Id);
+		controller.setAnswer();
+		System.assertEquals(' Testing', controller.getAnswerFromAQId(randomAQT.Application_Question__r.Id));
+		String longTextAnswer = '';
+		for (Integer i = 0; i < 3300; i++){
+			longTextAnswer += 'a';
+		}
+		ApexPages.currentPage().getParameters().put('answerType', 'Text_Answer__c');
+		ApexPages.currentPage().getParameters().put('answerToSet', longTextAnswer);
+		controller.setAnswer();
+        controller.markSectionAsComplete();
+		controller.currApp.put(controller.statusField, 'Submitted');
+		update controller.currApp;
+		controller.initialiseData();
+		System.assertEquals(true, controller.disable);
+		controller.upsertAnswer();
+		System.assertEquals(9, ApexPages.getMessages().size());
+		controller.saveAndContinueLater();
+		System.assertEquals(null, controller.pageNumber);
+		//Additional testing
+		controller.generateRegionCBW();
+        
+        controller.saveAndSubmit();
+	}
+   
+	static testMethod void initialiseDataTesting2() {
+		SIB_ApplicationFormExtension controller = new SIB_ApplicationFormExtension();
+		Application__c appToUse = getCurrentApplication();
+        appToUse.Status__c = 'Successful';
+        appToUse.Identity_Check_Status__c = 'Submitted';
+        appToUse.Full_Application_Status__c = 'Draft';
+        update appToUse;
+		ApexPages.currentPage().getParameters().put('Id', appToUse.Id);
+		ApexPages.currentPage().getParameters().put('formType', 'Full Application');   
+        System.debug('URL:'+Page.SIB_ApplicationList.getUrl());
+		//System.assertEquals(Page.SIB_ApplicationList.getUrl(), controller.initialiseData().getURL());
+        System.debug('Theme:'+ApexPages.currentPage().getParameters().get('formType'));
+		PageReference pr = controller.initialiseData();
+		System.assertEquals(null, pr);
+		System.assertEquals('Full application', controller.formDisplayName);
+		System.assertEquals(0, controller.getHighestPageNumber());
+		// System.assertEquals(3, controller.objectNameToRecords.keySet().size());
+		System.assertEquals(1, controller.objectNameToRecords.keySet().size());
+		System.assertEquals('Full_Application_Status__c', controller.statusField);
+		System.assertEquals('Draft', controller.currApp.get(controller.statusField));
+		System.assertEquals(0, controller.branchQuestionMap.keySet().size());
+		System.assertEquals(false, controller.disable);
+		System.assertEquals(0, controller.getSWAnswers().keySet().size());
+		controller.currApp.put(controller.statusField, 'Submitted');
+		update controller.currApp;
+		controller.initialiseData();
+		System.assertEquals(true, controller.disable);
+		controller.currApp.put(controller.statusField, 'Draft');
+		update controller.currApp;
+		controller.initialiseData();
+		controller.viewAllAnswers();
+		System.assertEquals(controller.formSection, 'ALL_QUESTIONS');
+		System.assertEquals(2, controller.getSWAnswers().keySet().size());
+		System.assertEquals(controller.additionalSectionToShow, 'Section Summary');
+		System.assertEquals(controller.pageNumber, null);
+		controller.previous();
+		System.assertEquals(controller.formSection, '');
+		System.assertEquals(controller.additionalSectionToShow, '');
+		controller.additionalSectionToShow = 'Section Summary';
+		controller.setFormSection();
+		System.assertEquals('', controller.additionalSectionToShow);
+		controller.getQWS();
+		System.assertEquals(false, controller.hasNext);
+		System.assertEquals(false, controller.hasPrevious);
+		ApexPages.currentPage().getParameters().put('formSectionHeader', '1. Overview of your project');
+		controller.setFormSection();
+		System.assertEquals('1. Overview of your project', controller.formSection);
+		System.assertEquals(5, controller.questionHolders.size());
+		ApexPages.currentPage().getParameters().put('pageNumber', '1');
+		controller.setPageNumber();
+		System.assertEquals(1, controller.pageNumber);
+		System.assertEquals(false, controller.hasPrevious);
+		System.assertEquals(3, controller.getHighestPageNumber());
+		controller.previous();
+		System.assertEquals(null, controller.pageNumber);
+		ApexPages.currentPage().getParameters().put('pageNumber', '4');
+		controller.setPageNumber();
+		System.assertEquals(false, controller.displayQuestionHelpText);
+		controller.toggleDisplayQuestionHelpText();
+		System.assertEquals(true, controller.displayQuestionHelpText);
+		controller.saveAndContinue();
+		System.assertEquals(false, controller.displayQuestionHelpText);
+		System.assertEquals(null, controller.pageNumber);
+		System.assertEquals('Section Summary', controller.additionalSectionToShow);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 3);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 2);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, 1);
+		controller.previous();
+		System.assertEquals(controller.pageNumber, null);
+		System.assertEquals('1. Overview of your project', controller.formSection);
+		System.assertEquals(1, controller.getSWAnswers().keySet().size());
+		controller.previous();
+		System.assertEquals('', controller.formSection);
+		ApexPages.currentPage().getParameters().put('sObjectType', 'Primary_Outcome__c');
+		controller.generateSObject();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.nextSubPage();
+		System.assertEquals(controller.subPageNumber, 2);
+		controller.previous();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.previous();
+		System.assertEquals(null, controller.subPageNumber);
+		controller.pageNumber = 3;
+		System.assertEquals(0, controller.getSObjectSize());
+		ApexPages.currentPage().getParameters().put('formSectionHeader', '5. Outcomes and payment triggers');
+		controller.setFormSection();
+		controller.saveAndContinue();
+		System.assertEquals('primary outcome', controller.getSObjectLabel().toLowerCase());
+		controller.generateSObject();
+		System.assertEquals(controller.subPageNumber, 1);
+		controller.saveSObject();
+		System.assertEquals(1, controller.getSObjectSize());
+		System.assertEquals(null, controller.subPageNumber);
+		System.assertEquals(null, controller.sObjectToCreate);
+		ApexPages.currentPage().getParameters().put('pageNumber', '1');
+		ApexPages.currentPage().getParameters().put('subPageNumber', '1');
+		ApexPages.currentPage().getParameters().put('sObjectNumber', '0');
+		ApexPages.currentPage().getParameters().put('sObjectName', 'Primary_Outcome__c');
+		controller.setPageNumber();
+		System.assertNotEquals(null, controller.sObjectToCreate);
+		System.assertEquals(1, controller.subPageNumber);
+		System.assertEquals(Page.SIB_ApplicationList.getURL(), controller.returnHomePage().getURL());
+		Application_Question_Template__c randomAQT = [
+			SELECT Application_Question__r.Id, Id
+			FROM Application_Question_Template__c
+			WHERE Application_Form_Section__r.Name = '5. Outcomes and payment triggers'
+			LIMIT 1
+		];
+		controller.formSection = '5. Outcomes and payment triggers';
+		System.assertEquals('', controller.getAnswerFromAQId(randomAQT.Application_Question__r.Id));
+		ApexPages.currentPage().getParameters().put('answerType', 'Short_Text_Answer__c');
+		ApexPages.currentPage().getParameters().put('answerToSet', 'Testing');
+		ApexPages.currentPage().getParameters().put('aqtId', randomAQT.Id);
+		controller.setAnswer();
+		System.assertEquals(' Testing', controller.getAnswerFromAQId(randomAQT.Application_Question__r.Id));
+		String longTextAnswer = '';
+		for (Integer i = 0; i < 33000; i++){
+			longTextAnswer += 'a';
+		}
+		ApexPages.currentPage().getParameters().put('answerType', 'Text_Answer__c');
+		ApexPages.currentPage().getParameters().put('answerToSet', longTextAnswer);
+		controller.setAnswer();
+
+	    controller.upsertAnswer();
+//        controller.initialiseData();
+		ApexPages.currentPage().getParameters().put('sObjectType', 'Primary_Outcome__c');
+		controller.generateSObject();        
+        ApexPages.currentPage().getParameters().put('childSObjectType', 'Outcome_Payment_Trigger__c');
+        List<SIB_ApplicationFormExtension.ApplicationQuestionHolder> qws = controller.getqws();
+       
+        controller.generatecOfChildSObject();
+        controller.setSubPageNumber();
+        Integer int1 = controller.getcOfChildSObjectSize();
+        String str1 = controller.getcOfchildSObjectLabel();        
+        controller.getHasChild();
+        
+        controller.saveAndContinueLater();
+		System.assertEquals(null, controller.pageNumber);
+		//Additional testing
+		controller.generateRegionCBW();
+        Application_Answer__c aw = [Select Id From Application_Answer__c Limit 1];
+        ApexPages.currentPage().getParameters().put('ansId', aw.Id);
+        ApexPages.currentPage().getParameters().put('attachName', 'FiletoLoad');
+        controller.showMessage();
+        controller.updAttachment();
+        // String displayFields = SIB_ApplicationFormExtension.getFieldsToDisplay();
+        // controller.saveAndSubmit();
+        Application_Question_Template__c aqt = new Application_Question_Template__c();
+        Application_Answer__c applicationAnswer = new Application_Answer__c();
+        // SIB_ApplicationFormExension.ApplicationQuestionHolder aqh = new SIB_ApplicationFormExension.ApplicationQuestionHolder(aqt, applicationAnswer, appToUse);
+        SIB_ApplicationFormExtension.ApplicationQuestionHolder aqhWithChildRecord = controller.returnAQHWithChildRecord();
+        String s = aqhWithChildRecord.getFieldsToDisplay();
+        
+        Application__c app = new Application__c();
+        ApexPages.StandardController ssc = new ApexPages.StandardController(app);
+        SIB_ApplicationFormExtension controller2 = new SIB_ApplicationFormExtension(ssc);
+	}
+    
+	private static Application__c getCurrentApplication(){
+		return [
 			SELECT Id
 			FROM Application__c
 			LIMIT 1
 		];
-		List<Application_Question_Template__c> aqt = [
-			SELECT Id, Application_Question__c
-			FROM Application_Question_Template__c
-		];
-		ApexPages.currentPage().getParameters().put('Id', appToUse.Id);
-		controller.initialiseData();
-		System.assertEquals('Development_Form_Status__c', controller.statusField);
-		System.assertEquals(0, controller.applicationCommissioners.size());
-		System.assertEquals(0, controller.prevApps.size());
-		System.assertEquals(0, controller.applicationOutcomes.size());
-		System.assertEquals(null, controller.questionNumber);
-		ApexPages.currentPage().getParameters().put('formType', 'Expression of Interest');
-		controller.initialiseData();
-		System.assertEquals('Status__c', controller.statusField);
-		ApexPages.currentPage().getParameters().put('questionNumber', '1');
-		controller.setQuestionNumber();
-		System.assertEquals(1, controller.questionNumber);
-		controller.viewAllAnswers();
-		System.assertEquals(null, controller.questionNumber);
-		System.assertEquals('ALL_QUESTIONS', controller.formSection);
-		System.assertEquals('Section Summary', controller.additionalSectionToShow);
-		ApexPages.currentPage().getParameters().put('formSectionHeader', 'Test Section');
-		controller.setFormSection();
-		System.assertEquals('Test Section', controller.formSection);
-		ApexPages.currentPage().getParameters().put('formSectionHeader', '');
-		controller.setFormSection();
-		System.assertEquals('', controller.formSection);
-		System.assertEquals(null, controller.commissionerToCreate);
-		System.assertEquals(null, controller.prevAppToCreate);
-		System.assertEquals(null, controller.outcomeToCreate);
-		controller.pageNumber = 1;
-		controller.nextPage();
-		System.assertEquals(2, controller.pageNumber);
-		controller.previousPage();
-		System.assertEquals(1, controller.pageNumber);
-		controller.nextPage();
-		System.assertEquals(2, controller.pageNumber);
-		controller.commissionerToCreate = new Contact(
-			Email = 'test'
-		);
-		controller.nextPage();
-		System.assertEquals(1, ApexPages.getMessages().size());
-		controller.organisationToCreate = new Account();
-		controller.createCommissioner();
-		controller.commissionerToCreate.Email = 'test@test.com';
-		controller.commissionerToCreate.LastName = 'Test';
-		controller.organisationToCreate.Name = 'Test Org Name';
-		controller.insertCommissioner();
-		ApexPages.currentPage().getParameters().put('commissionerIndex', '0');
-		ApexPages.currentPage().getParameters().put('pageNumberToSet', '1');
-		controller.setCommissioner();
-		System.assertEquals(controller.commissionerToCreate.Email, 'test@test.com');
-		controller.deleteCommissioner();
-		System.assertEquals(0, controller.applicationCommissioners.size());
-		controller.organisationToCreate = new Account();
-		controller.createCommissioner();
-		controller.commissionerToCreate.Email = 'test';
-		controller.insertCommissioner();
-		System.assertEquals(4, ApexPages.getMessages().size());
-		System.assertEquals('Please enter organisation name', ApexPages.getMessages()[1].getDetail());
-		System.assertEquals('Please enter commissioner last name', ApexPages.getMessages()[2].getDetail());
-		System.assertEquals('Required fields are missing: [Name]', ApexPages.getMessages()[3].getDetail());
-		System.assertEquals(null, controller.questionNumber);
-		ApexPages.currentPage().getParameters().put('questionNumber', '1');
-		controller.setQuestionNumber();
-		System.assertEquals(null, controller.questionNumber);
-		controller.createOutcome();
-		System.assertNotEquals(null, controller.outcomeToCreate);
-		System.assertEquals(1, controller.pageNumber);
-		System.assertEquals(0, controller.applicationOutcomes.size());
-		controller.insertOutcome();
-		System.assertEquals(1, controller.applicationOutcomes.size());
-		ApexPages.currentPage().getParameters().put('outcomeIndex', '0');
-		ApexPages.currentPage().getParameters().put('pageNumberToSet', '1');
-		controller.setOutcome();
-		System.assertNotEquals(null, controller.outcomeToCreate);
-		controller.deleteOutcome();
-		System.assertEquals(0, controller.applicationOutcomes.size());
-
-		controller.createPrevApp();
-		System.assertNotEquals(null, controller.prevAppToCreate);
-
-		System.assertEquals(0, controller.prevApps.size());
-		controller.insertPrevApp();
-		System.assertEquals(1, controller.prevApps.size());
-		ApexPages.currentPage().getParameters().put('prevAppIndex', '0');
-		controller.setPrevApp();
-		System.assertNotEquals(null, controller.prevAppToCreate);
-		controller.deletePrevApp();
-		System.assertEquals(0, controller.prevApps.size());
-		ApexPages.currentPage().getParameters().put('additionalSection', 'NOT Section Summary');
-		controller.toggleSection();
-		System.assertEquals('NOT Section Summary', controller.additionalSectionToShow);
-		ApexPages.currentPage().getParameters().put('aqtId', aqt[0].Id);
-		controller.formSection = 'Test Section';
-		ApexPages.currentPage().getParameters().put('additionalSection', 'Section Summary');
-		controller.questionNumber = 1;
-		controller.saveAndContinue();
-		//System.assertEquals(null, controller.questionNumber);
-		ApexPages.currentPage().getParameters().put('formSectionHeader', 'Test Section');
-		controller.setFormSection();
-		System.assertEquals(1, controller.getqws().size());
-		System.assertEquals(1, controller.getSWAnswers().keySet().size());
-		ApexPages.currentPage().getParameters().put('formSectionHeader', 'ALL_QUESTIONS');
-		controller.setFormSection();
-		System.assertEquals(1, controller.getSWAnswers().keySet().size());
-		controller.questionNumber = 0;
-		System.assertEquals(Page.SIB_ApplicationList.getURL(), controller.returnHomePage().getURL());
-		controller.toggleDisplayQuestionHelpText();
-		System.assertEquals(true, controller.displayQuestionHelpText);
-		controller.previous();
-		System.assertEquals('', controller.formSection);
-		controller.additionalSectionToShow = 'Section Summary';
-		controller.previous();
-		System.assertEquals('', controller.additionalSectionToShow);
-		System.assertEquals(0, controller.questionNumber);
-		controller.pageNumber = 2;
-		controller.previous();
-		System.assertEquals(1, controller.pageNumber);
-		controller.previous();
-		System.assertEquals(null, controller.commissionerToCreate);
-		controller.pageNumber = null;
-		controller.formSection = controller.commissionerHeading;
-		controller.commissionerToCreate = new Contact();
-		controller.previous();
-		System.assertEquals(null, controller.commissionerToCreate);
-		controller.additionalSectionToShow = 'Commissioner';
-		controller.previous();
-		System.assertEquals('', controller.additionalSectionToShow);
-		controller.previous();
-		//System.assertEquals('', controller.formSection);
-		controller.questionNumber = null;
-		controller.formSection = 'test';
-		controller.previous();
-		System.assertEquals('', controller.formSection);
-		controller.questionNumber = 1;
-		controller.previous();
-		System.assertEquals(null, controller.questionNumber);
-
-		ApexPages.currentPage().getParameters().put('answerType', 'Radio_Answer__c');
-		ApexPages.currentPage().getParameters().put('answerToSet', 'Test');
-		ApexPages.currentPage().getParameters().put('aqtId', aqt[0].Id);
-		ApexPages.currentPage().getParameters().put('formSectionHeader', 'Test Section');
-		controller.setFormSection();
-		controller.setAnswer();
-		System.assertEquals(' Test', controller.getAnswerFromAQId(aqt[0].Application_Question__c));
-		controller.pageNumber = 1;
-		controller.nextPage();
-		System.assertEquals(1, controller.pageNumber);
-		controller.questionNumber = 1;
-		controller.saveAndContinueLater();
-		System.assertEquals(null, controller.questionNumber);
-		controller.formSection = 'Test Section';
-		controller.questionNumber = 1;
-		controller.saveAndContinue();
-		controller.questionNumber = 2;
-		controller.saveAndContinue();
-		System.assertEquals(false, controller.hasNext);
-		controller.disable = true;
-		System.assertEquals(0, controller.saveCurrentSection().size());
-		System.assertEquals('Your application has already been submitted, you cannot edit it now.', ApexPages.getMessages()[4].getDetail());
-		System.assertEquals(5, ApexPages.getMessages().size());
-		controller.upsertAnswer();
-		controller.questionNumber = 1;
-		controller.saveAndContinueLater();
-		System.assertEquals(null, controller.questionNumber);
-		System.assertEquals(null, controller.commissionerToCreate);
-		System.assertEquals(null, controller.outcomeToCreate);
-		controller.formSection = 'Test Section';
-		controller.markSectionAsComplete();
-		System.assertEquals(controller.sectionWrappers.get('Test Section').status,  'COMPLETED');
-		controller.disable = false;
-		controller.formSection = 'Test Section';
-		System.assertEquals(0, controller.saveCurrentSection().size());
-		controller.formSection = 'Test Section';
-		ApexPages.currentPage().getParameters().put('questionId', aqt[0].Id);
-		controller.upsertAnswer();
-		String longAnswer = '';
-		for(Integer i = 0; i < 35000; i++){
-			longAnswer+='a';
-		}
-
 	}
 }

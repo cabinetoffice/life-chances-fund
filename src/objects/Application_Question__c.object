@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -49,6 +45,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -90,6 +87,17 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Child_Header_Question__c</fullName>
+        <externalId>false</externalId>
+        <label>Child Header Question</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Field_From_Contact_Record__c</fullName>
         <description>This is the API name of the field on the contact record you wish to pull the value from.</description>
         <externalId>false</externalId>
@@ -106,49 +114,60 @@
         <fullName>Field_To_Set_On_Answer__c</fullName>
         <externalId>false</externalId>
         <label>Field To Set On Answer</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Short_Text_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkbox_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkboxes_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Date_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Email_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Multi_Picklist_Answers__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Percent_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Picklist_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Text_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Short_Text_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Short_Text_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Checkbox_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Checkbox_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Checkboxes_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Checkboxes_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Date_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Date_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Email_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Email_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Multi_Picklist_Answers__c</fullName>
+                    <default>false</default>
+                    <label>Multi_Picklist_Answers__c</label>
+                </value>
+                <value>
+                    <fullName>Percent_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Percent_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Picklist_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Picklist_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Text_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Text_Answer__c</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Field_to_Check_for_Rendering__c</fullName>
@@ -162,120 +181,162 @@ Multi_Picklist_Answers__c = Multi-Select Picklist
 Percent_Answer__c = Percent
 Picklist_Answer__c = Single Picklist</inlineHelpText>
         <label>Field to Check for Rendering</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Checkbox_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkboxes_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Currency_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Email_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Multi_Picklist_Answers__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Percent_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Picklist_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Short_Text_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Radio_Answer__c</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Checkbox_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Checkbox_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Checkboxes_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Checkboxes_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Currency_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Currency_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Email_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Email_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Multi_Picklist_Answers__c</fullName>
+                    <default>false</default>
+                    <label>Multi_Picklist_Answers__c</label>
+                </value>
+                <value>
+                    <fullName>Percent_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Percent_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Picklist_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Picklist_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Short_Text_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Short_Text_Answer__c</label>
+                </value>
+                <value>
+                    <fullName>Radio_Answer__c</fullName>
+                    <default>false</default>
+                    <label>Radio_Answer__c</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Field_to_Conditionally_Render__c</fullName>
         <description>Select which field you would like to conditionally render based on answer.</description>
         <externalId>false</externalId>
         <label>Field to Conditionally Render</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Short Text</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Long Text</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Date</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Single Picklist</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Multi-Select Picklist</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkbox</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkboxes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Number</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Currency</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Percent</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Radio Select</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Single Checkbox</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Picklist</type>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Short Text</fullName>
+                    <default>false</default>
+                    <label>Short Text</label>
+                </value>
+                <value>
+                    <fullName>Long Text</fullName>
+                    <default>false</default>
+                    <label>Long Text</label>
+                </value>
+                <value>
+                    <fullName>Date</fullName>
+                    <default>false</default>
+                    <label>Date</label>
+                </value>
+                <value>
+                    <fullName>Single Picklist</fullName>
+                    <default>false</default>
+                    <label>Single Picklist</label>
+                </value>
+                <value>
+                    <fullName>Multi-Select Picklist</fullName>
+                    <default>false</default>
+                    <label>Multi-Select Picklist</label>
+                </value>
+                <value>
+                    <fullName>Checkbox</fullName>
+                    <default>false</default>
+                    <label>Checkbox</label>
+                </value>
+                <value>
+                    <fullName>Checkboxes</fullName>
+                    <default>false</default>
+                    <label>Checkboxes</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Phone</fullName>
+                    <default>false</default>
+                    <label>Phone</label>
+                </value>
+                <value>
+                    <fullName>Number</fullName>
+                    <default>false</default>
+                    <label>Number</label>
+                </value>
+                <value>
+                    <fullName>Currency</fullName>
+                    <default>false</default>
+                    <label>Currency</label>
+                </value>
+                <value>
+                    <fullName>Percent</fullName>
+                    <default>false</default>
+                    <label>Percent</label>
+                </value>
+                <value>
+                    <fullName>Radio Select</fullName>
+                    <default>false</default>
+                    <label>Radio Select</label>
+                </value>
+                <value>
+                    <fullName>Single Checkbox</fullName>
+                    <default>false</default>
+                    <label>Single Checkbox</label>
+                </value>
+                <value>
+                    <fullName>Attachment</fullName>
+                    <default>false</default>
+                    <label>Attachment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Has_Child_Of_Child__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Has Child Of Child</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Help_Text__c</fullName>
@@ -299,9 +360,44 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Object_API_Name__c</fullName>
+        <description>This field will be utilised to select which object we will be creating</description>
+        <externalId>false</externalId>
+        <label>Object API Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Page_Number_To_Display_On__c</fullName>
+        <externalId>false</externalId>
+        <label>Page Number To Display On</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pages_for_Add_Another__c</fullName>
+        <externalId>false</externalId>
+        <label>Pages for Add Another</label>
+        <summarizedField>Child_Record_Question__c.Page_Number_To_Display_On__c</summarizedField>
+        <summaryForeignKey>Child_Record_Question__c.Application_Question__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
         <fullName>Picklist_Options__c</fullName>
         <externalId>false</externalId>
-        <label>Picklist Options</label>
+        <label>Radio Select Options</label>
         <length>32768</length>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -312,7 +408,7 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <fullName>Question_Number__c</fullName>
         <externalId>true</externalId>
         <label>Question ID</label>
-        <precision>4</precision>
+        <precision>6</precision>
         <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
@@ -324,77 +420,98 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <fullName>Question_Type__c</fullName>
         <externalId>false</externalId>
         <label>Question Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Short Text</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Long Text</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Date</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Single Picklist</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Multi-Select Picklist</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkbox</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Checkboxes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Number</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Currency</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Percent</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Radio Select</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Single Checkbox</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Short Text</fullName>
+                    <default>false</default>
+                    <label>Short Text</label>
+                </value>
+                <value>
+                    <fullName>Long Text</fullName>
+                    <default>false</default>
+                    <label>Long Text</label>
+                </value>
+                <value>
+                    <fullName>Date</fullName>
+                    <default>false</default>
+                    <label>Date</label>
+                </value>
+                <value>
+                    <fullName>Single Picklist</fullName>
+                    <default>false</default>
+                    <label>Single Picklist</label>
+                </value>
+                <value>
+                    <fullName>Multi-Select Picklist</fullName>
+                    <default>false</default>
+                    <label>Multi-Select Picklist</label>
+                </value>
+                <value>
+                    <fullName>Checkbox</fullName>
+                    <default>false</default>
+                    <label>Checkbox</label>
+                </value>
+                <value>
+                    <fullName>Checkboxes</fullName>
+                    <default>false</default>
+                    <label>Checkboxes</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Phone</fullName>
+                    <default>false</default>
+                    <label>Phone</label>
+                </value>
+                <value>
+                    <fullName>Number</fullName>
+                    <default>false</default>
+                    <label>Number</label>
+                </value>
+                <value>
+                    <fullName>Currency</fullName>
+                    <default>false</default>
+                    <label>Currency</label>
+                </value>
+                <value>
+                    <fullName>Percent</fullName>
+                    <default>false</default>
+                    <label>Percent</label>
+                </value>
+                <value>
+                    <fullName>Radio Select</fullName>
+                    <default>false</default>
+                    <label>Radio Select</label>
+                </value>
+                <value>
+                    <fullName>Single Checkbox</fullName>
+                    <default>false</default>
+                    <label>Single Checkbox</label>
+                </value>
+                <value>
+                    <fullName>Attachment</fullName>
+                    <default>false</default>
+                    <label>Attachment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
         <visibleLines>4</visibleLines>
     </fields>
     <fields>
         <fullName>Question__c</fullName>
         <externalId>false</externalId>
         <label>Question</label>
-        <required>true</required>
+        <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
@@ -412,19 +529,28 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
         <fullName>Subtext__c</fullName>
         <externalId>false</externalId>
         <label>Subtext</label>
-        <length>255</length>
-        <required>false</required>
+        <length>2048</length>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <label>Application Question</label>
     <listViews>
         <fullName>All</fullName>
         <columns>Question_Number__c</columns>
         <columns>NAME</columns>
+        <columns>Question__c</columns>
         <columns>Question_Type__c</columns>
+        <columns>Field_From_Contact_Record__c</columns>
+        <columns>Page_Number_To_Display_On__c</columns>
+        <columns>Object_API_Name__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>Field_To_Set_On_Answer__c</columns>
+        <columns>Character_Word_Assistance__c</columns>
+        <columns>Subtext__c</columns>
+        <columns>Field_to_Conditionally_Render__c</columns>
+        <columns>Has_Child_Of_Child__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -468,4 +594,5 @@ Picklist_Answer__c = Single Picklist</inlineHelpText>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
 </CustomObject>

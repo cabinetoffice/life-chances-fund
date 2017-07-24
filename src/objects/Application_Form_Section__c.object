@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -50,6 +46,7 @@
     <description>This will hold the help text to allow us to display the user the overview screen.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
@@ -61,21 +58,41 @@
         <fullName>Form_To_Use_In__c</fullName>
         <externalId>false</externalId>
         <label>Form To Use In</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Expression of Interest</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Development Form</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Expression of Interest</fullName>
+                    <default>false</default>
+                    <label>Expression of Interest</label>
+                </value>
+                <value>
+                    <fullName>Development Form</fullName>
+                    <default>false</default>
+                    <label>Development Form</label>
+                </value>
+                <value>
+                    <fullName>Full Application</fullName>
+                    <default>false</default>
+                    <label>Full Application</label>
+                </value>
+                <value>
+                    <fullName>Financial health and fraud prevention</fullName>
+                    <default>false</default>
+                    <label>Financial health and fraud prevention</label>
+                </value>
+                <value>
+                    <fullName>Identity Check</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Identity Check</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Help_Text__c</fullName>
@@ -87,6 +104,13 @@
         <visibleLines>25</visibleLines>
     </fields>
     <label>Application Form Section</label>
+    <listViews>
+        <fullName>All1</fullName>
+        <columns>NAME</columns>
+        <columns>Form_To_Use_In__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <label>Application Form Section Name</label>
         <type>Text</type>
@@ -95,4 +119,5 @@
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
     <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
 </CustomObject>

@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>FreezeUserAction</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -46,6 +42,10 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -101,7 +101,7 @@
             <operation>equals</operation>
             <value>System Administrator</value>
         </filters>
-        <label>Admin Users</label>
+        <label>System Admins</label>
     </listViews>
     <listViews>
         <fullName>AllUsers</fullName>
@@ -114,6 +114,43 @@
         <columns>CORE.PROFILE.NAME</columns>
         <filterScope>Everything</filterScope>
         <label>All Users</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Admin</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>equals</operation>
+            <value>BLF Administrator</value>
+        </filters>
+        <label>All Admin</label>
+    </listViews>
+    <listViews>
+        <fullName>SIB_standard_user</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>SIB standard user</value>
+        </filters>
+        <label>Reviewers</label>
     </listViews>
     <searchLayouts>
         <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>

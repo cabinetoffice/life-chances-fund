@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notification that user has been added to a community. With Cabinet Office letterhead</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Cabinet_Office_Letterhead</letterhead>
+    <name>New Member Welcome email - Letterhead</name>
+    <style>freeForm</style>
+    <subject>Life Chances Fund Registration</subject>
+    <textOnly>Dear {!Receiving_User.FirstName},
+
+Thank you for your interest in the Life Chances Fund. To complete your registration and set a password, go to {!Community_Url}
+
+Username: {!Receiving_User.Username}
+
+Thanks
+Centre for Social Impact Bonds</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

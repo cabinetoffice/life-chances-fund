@@ -10,7 +10,7 @@
 							<div class="form-group">
 								<fieldset>
 									<legend class="visually-hidden">What theme are you applying for?</legend>
-									<apex:repeat value="{!themes}" var="t">
+									<apex:repeat value="{!themeNameToIdMap}" var="t">
 										<label class="block-label selection-button-radio">
 											<input onchange="setRadioAnswer('{!themeNameToIdMap[t]}')" type="radio" id="{!themeNameToIdMap[t]}" name="typeRadio"/>
 											{!t}
@@ -23,6 +23,7 @@
 						&nbsp;
 						<apex:outputPanel id="buttons">
 							<apex:commandButton styleClass="button" rendered="{!selectedTheme != ''}" action="{!startApplication}" value="Start Application"/>
+                            <br/><br/>
 						</apex:outputPanel>
 				</apex:outputPanel>
 				<script>

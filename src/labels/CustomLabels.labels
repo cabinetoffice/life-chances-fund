@@ -8,6 +8,14 @@
         <value>Please provide details of &lt;br/&gt; commissioners who will be paying for &lt;br/&gt;outcomes</value>
     </labels>
     <labels>
+        <fullName>SIB_Community_Profile_Name</fullName>
+        <categories>SIB</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SIB Community Profile Name</shortDescription>
+        <value>SIB Applicant</value>
+    </labels>
+    <labels>
         <fullName>SIB_Error_Message</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -23,7 +31,8 @@ Alternatively you can contact a member of the team via email general.enquiries@b
         <shortDescription>SIB Forgot Password Confirm</shortDescription>
         <value>You will receive an automatic email to reset your password in your inbox in a few minutes.
 If you don&apos;t receive any email from us, it could be because the email address that you had typed in doesn&apos;t exist in our system. Only already registered users will be able to reset their passwords. If you need to create an account, please go to our registration page.
-If you experience any difficulties in resetting your password, please contact lifechancesfund@cabinetoffice.gov.uk</value>
+
+If you experience any difficulties in resetting your password, please contact lifechancesfund@biglotteryfund.org.uk.</value>
     </labels>
     <labels>
         <fullName>SIB_Guest_Profile</fullName>
@@ -31,6 +40,14 @@ If you experience any difficulties in resetting your password, please contact li
         <protected>false</protected>
         <shortDescription>SIB_Guest_Profile</shortDescription>
         <value>00e25000000MAdNAAW</value>
+    </labels>
+    <labels>
+        <fullName>SIB_ID_Check_Question</fullName>
+        <categories>SIB</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SIB ID check question</shortDescription>
+        <value>Is the information in the ID Check still valid?</value>
     </labels>
     <labels>
         <fullName>SIB_Landing_Page_Help_Text</fullName>

@@ -15,13 +15,14 @@ private class SIB_NewApplicationControllerTest {
 
 	static testMethod void positiveTesting() {
 		SIB_NewApplicationController controller = new SIB_NewApplicationController();
-		System.assertEquals(1, controller.themes.size());
+		System.assertEquals(1, controller.themeNameToIdMap.size());
 		Theme__c theme = [
 			SELECT Name, Id
 			FROM Theme__c
 			LIMIT 1
 		];
-		System.assertEquals(theme.Name, controller.themes[0]);
+		// System.assertEquals(theme.Name, controller.themeNameToIdMap.values()[0]);
+		System.assertEquals(theme.Id, controller.themeNameToIdMap.values()[0]);
 		ApexPages.currentPage().getParameters().put('valueToSet', theme.Id);
 		System.assertEquals(null, controller.selectedTheme);
 		controller.setValue();
@@ -38,7 +39,7 @@ private class SIB_NewApplicationControllerTest {
 			FROM Application__c
 		];
 		System.assertEquals(1, apps.size());
-		System.assertEquals('/apex/SIB_ApplicationForm?formType=Expression+Of+Interest&id=' + apps[0].Id,startApplicationURL);
+		System.assertEquals('/apex/SIB_ApplicationForm?formType=Financial+health+and+fraud+prevention&id=' + apps[0].Id,startApplicationURL);
 
 	}
 	
