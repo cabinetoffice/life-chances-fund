@@ -1,0 +1,10 @@
+{
+    "orgName": "lcf-co-ls",
+    "country": "GB",
+    "edition": "Developer",
+    "description": "Life Chances Fund Web App 2.0",
+    "features": ["Communities", "Sites"],
+    "orgPreferences" : {
+        "enabled": ["S1DesktopEnabled","NetworksEnabled"]
+    }
+}

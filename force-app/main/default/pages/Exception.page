@@ -1,0 +1,21 @@
+<apex:page standardStylesheets="false" showHeader="false" docType="html-5.0">
+  <apex:composition template="Layout">
+    <apex:define name="breadcrumbs">
+    </apex:define>
+    <apex:define name="main">
+      
+      <div class="grid-row">
+        <div class="column-full">
+          
+          <h1 class="heading-xlarge">
+            <span class="heading-secondary">Sorry...</span>
+            We ran into an error
+          </h1>
+          <p>If you entered a web address please check it was correct.</p>
+          <p>If you're having trouble with this service please contact us.</p>
+        </div>
+      </div>
+
+    </apex:define>
+  </apex:composition>
+</apex:page>

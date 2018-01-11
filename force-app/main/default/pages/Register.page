@@ -1,0 +1,2 @@
+<apex:page controller="RegisterController" standardStylesheets="false" showHeader="false" docType="html-5.0">
+</apex:page>

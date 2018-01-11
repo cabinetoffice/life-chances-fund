@@ -1,0 +1,26 @@
+<apex:page controller="LoginController" standardStylesheets="false" showHeader="false" docType="html-5.0">
+
+    <apex:composition template="Layout">
+
+        <apex:define name="main">
+
+            <h1 class="heading-xlarge">
+                <span class="heading-secondary">Login</span>
+                Login
+            </h1>
+            <br />
+
+            <div class="grid-row">
+                <div class="column-two-thirds">
+
+                    Login
+
+                </div>
+            </div>
+
+            <apex:form>
+                <apex:commandButton value="Login" action="{!login}" styleClass="button" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
