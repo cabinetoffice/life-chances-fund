@@ -1,6 +1,0 @@
-<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
-<tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<font face="Arial, sans-serif"><span style="color: rgb(0, 0, 0); font-family: arial; font-size: 12px; background-color: rgb(255, 255, 255);">Dear {!Receiving_User.FirstName},</span><br style="font-size: 12px;"><br style="font-size: 12px;"><span style="font-size: 12px;">Thank you for your interest in the Life Chances Fund. To complete your registration and set a password, go to {!Community_Url}</span><br style="font-size: 12px;"><br style="font-size: 12px;"><span style="color: rgb(0, 0, 0); font-family: arial; font-size: 12px; background-color: rgb(255, 255, 255);">Username: {!Receiving_User.Username}</span><br style="font-size: 12px;"><br style="font-size: 12px;"><span style="color: rgb(0, 0, 0); font-family: arial; font-size: 12px; background-color: rgb(255, 255, 255);">Thanks</span><br style="font-size: 12px;"><span style="color: rgb(0, 0, 0); font-family: arial; font-size: 12px; background-color: rgb(255, 255, 255);">Centre for Social Impact Bonds</span></font>]]></td>
-</tr>
-</table>
