@@ -3,7 +3,7 @@
 		<apex:define name="breadcrumbs">
 		    <div class="breadcrumbs">
                 <ol>
-                    <li><apex:outputLink value="{!$Page.applications}">Applications</apex:outputLink></li>
+                    <li><apex:outputLink value="{!$Page.Applications}">Applications</apex:outputLink></li>
                     <li aria-current="page">{!form.title}</li>
                 </ol>
             </div>
@@ -31,11 +31,11 @@
 							<apex:repeat value="{!form.sections}" var="section">
                     			<tr>
 									<th scope="row" class="section-identifier">
-										<apex:outputLink value="{!$Page.start}">
+										<apex:outputLink value="{!$Page.Start}">
 										    {!count}. {!section.title}
 										    <apex:param name="form" value="{!form.id}"/>
 										    <apex:param name="section" value="{!section.id}"/>
-										    <apex:param name="app" value="{!application['identifier__c']}"/>
+										    <apex:param name="app" value="{!application['Name']}"/>
 										</apex:outputLink>
 									</th>
 									<td class="numeric"><span class="status">INCOMPLETE <!-- get field *_section_status stored in status_field of cof_config --></span></td>
@@ -45,7 +45,7 @@
 						</tbody>
 					</table>
 					<br />
-					<apex:form>
+					<apex:form >
 						<apex:commandLink value="View all answers" action="{!viewAll}"/ >
 					</apex:form>
 				</div>
@@ -66,7 +66,7 @@
 
 					<br />
 
-					<apex:form>
+					<apex:form >
 		                <apex:commandButton value="Submit application" action="{!submit}" styleClass="button" disabled="true" html-aria-disabled="true" />
 		            </apex:form>
 

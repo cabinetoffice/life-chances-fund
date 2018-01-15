@@ -50,14 +50,15 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
     <label>Form LCF Commissioner 1.0</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>COM-{00000}</displayFormat>
+        <label>Commissioner ID</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Form LCF Commissioner 1.0</pluralLabel>
     <searchLayouts/>

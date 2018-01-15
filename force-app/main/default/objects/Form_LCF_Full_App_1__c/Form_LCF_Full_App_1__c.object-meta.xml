@@ -60,8 +60,9 @@
     <externalSharingModel>ReadWrite</externalSharingModel>
     <label>Form LCF Full Application 1.0</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>FAP-{00000}</displayFormat>
+        <label>Form ID</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Form LCF Full Application 1.0</pluralLabel>
     <searchLayouts/>

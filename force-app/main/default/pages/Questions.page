@@ -1,15 +1,18 @@
 <apex:page controller="QuestionsController" standardStylesheets="false" showHeader="false" docType="html-5.0">
+    <style type="text/css">
+        .boxstyle {width:38px; height:38px; border-color:black;}
+    </style>
 
     <apex:composition template="Layout">
         <apex:define name="breadcrumbs">
             <div class="breadcrumbs">
                 <ol>
-                    <li><apex:outputLink value="{!$Page.applications}">Applications</apex:outputLink></li>
+                    <li><apex:outputLink value="{!$Page.Applications}">Applications</apex:outputLink></li>
                     <li>
-                        <apex:outputLink value="{!$Page.sections}">
+                        <apex:outputLink value="{!$Page.Sections}">
                             {!form.title}
                             <apex:param name="form" value="{!form.id}"/>
-                            <apex:param name="app" value="{!application['identifier__c']}"/>
+                            <apex:param name="app" value="{!application['Name']}"/>
                         </apex:outputLink>
                     </li>
                     <li aria-current="page">{!section.title}</li>
@@ -50,7 +53,7 @@
                     <p>{!currentPage.guidance}</p>
                 </apex:pageBlock>
 
-                <apex:form>
+                <apex:form >
 
                     <apex:pageBlock rendered="{!currentPage.children != null}">
                         <table>
@@ -59,7 +62,7 @@
                                 <tr>
                                   <td>
                                     <apex:commandLink value="{!targetObject[currentPage.children.target_field]}" action="{!changeChild}" styleClass="">
-                                        <apex:param name="identifier" value="{!targetObject['identifier__c']}" assignTo="{!modifyChildIdentifier}"/>
+                                        <apex:param name="identifier" value="{!targetObject['Name']}" assignTo="{!modifyChildIdentifier}"/>
                                     </apex:commandLink> 
                                   </td>
                                   <td class="numeric"><a href="">Remove</a></td>
@@ -76,7 +79,7 @@
                         <apex:repeat value="{!fields}" var="field">
                             <div class="form-group" id="sp-text-group">
 
-                                <apex:messages></apex:messages>
+                                <apex:messages ></apex:messages>
 
                                 <apex:pageBlock rendered="{!field.isTextField == true}">
                                     <legend>
@@ -105,9 +108,20 @@
                                         <p>{!field.guidance}</p>
                                     </legend>
                                     <div class="needs-style">
-                                        <apex:selectCheckboxes borderVisible="false" value="{!targetObject[field.identifier]}" layout="pageDirection">
+                                        <!--<apex:selectCheckboxes borderVisible="false" value="{!field.valueList}" layout="pageDirection">
                                             <apex:selectOptions value="{!field.values}"></apex:selectOptions>
-                                        </apex:selectCheckboxes>
+                                        </apex:selectCheckboxes>-->
+                                        <ol style="list-style-type:none">
+                                        <apex:repeat value="{!field.optionList}" var="opt">
+                                        	<li>
+			                                    <div class="multiple-choice">
+			                                        <apex:inputCheckbox value="{!opt.selected}"/>
+			                                        <label for="waste-type-1">{!opt.value}</label>
+			                                    </div>
+			                                    <div>&nbsp;</div>
+			                                </li>
+                                        </apex:repeat>
+                                        </ol>
                                     </div>
                                 </apex:pageBlock>
 

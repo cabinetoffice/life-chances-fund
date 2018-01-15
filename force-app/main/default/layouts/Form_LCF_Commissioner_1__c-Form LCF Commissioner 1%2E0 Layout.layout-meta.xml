@@ -7,7 +7,7 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Readonly</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
@@ -31,12 +31,12 @@
                 <field>co_contact_number__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>identifier__c</field>
+                <behavior>Edit</behavior>
+                <field>full_application__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>co_full_application__c</field>
+                <field>application__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

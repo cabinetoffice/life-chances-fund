@@ -5,6 +5,7 @@ public class QuestionsController extends COF_PageController {
     public COF_QuestionSet questionSet {get; set;}
     public COF_Page currentPage {get; set;}
     public List<COF_Field> fields {get; set;}
+    public List<String> fieldValueList {get; set;}
 
     public SObject application {get;set;} 
     public SObject targetObject {get;set;}
@@ -26,6 +27,31 @@ public class QuestionsController extends COF_PageController {
 
         this.application = this.getApplication();
         this.currentPage = this.questionSet.getPage(this.getPageIdentifierParam());
+        List<COF_Field> fields = new List<COF_Field>();
+        List<String> fieldIdentifiers = new List<String>{'Id','Name'};
+        
+        if (this.currentPage.questions != null) {
+	        for (COF_QuestionSet.COF_Question question : this.currentPage.questions) {
+	            fieldIdentifiers.add(question.target_field);
+	            COF_Field newField = new COF_Field(question.target_field, this.questionSet.target_object);
+	            newField.guidance = question.guidance;
+	            if (question.recommended_word_limit != null) {
+	                newField.recommendedWordLimit = question.recommended_word_limit;
+	            }
+	            fields.add(newField);
+	            // Use prepareFields on page instead
+	        }
+	        this.fields = fields;
+        }
+
+        System.debug('###this.questionSet.target_object: '+this.questionSet.target_object);
+        String targetIdentifier = this.getRecordIdentifierParam();
+        system.debug('###targetIdentifier: '+targetIdentifier);
+        if (targetIdentifier == null) {
+            this.targetObject = Query.object(this.questionSet.target_object, fieldIdentifiers, 'where ' +  this.questionSet.parent_relationship + '.Name = \'' + this.getApplicationIdentifierParam() + '\'');
+        } else {
+            this.targetObject = Query.object(this.questionSet.target_object, fieldIdentifiers, 'where ' +  'Name = \'' + targetIdentifier + '\'');            
+        }
 
         if (this.currentPage.questions != null) {
             this.prepareQuestions();
@@ -37,30 +63,8 @@ public class QuestionsController extends COF_PageController {
     }
 
     public void prepareQuestions() {
-        List<COF_Field> fields = new List<COF_Field>();
-        List<String> fieldIdentifiers = new List<String>();
-        for (COF_QuestionSet.COF_Question question : this.currentPage.questions) {
-            fieldIdentifiers.add(question.target_field);
-            COF_Field newField = new COF_Field(question.target_field, this.questionSet.target_object);
-            newField.guidance = question.guidance;
-            if (question.recommended_word_limit != null) {
-                newField.recommendedWordLimit = question.recommended_word_limit;
-            }
-            fields.add(newField);
-            // Use prepareFields on page instead
-        }
 
-        this.fields = fields;
-
-        System.debug(this.questionSet.target_object);
-        String targetIdentifier = this.getRecordIdentifierParam();
-        if (targetIdentifier == null) {
-            this.targetObject = Query.object(this.questionSet.target_object, fieldIdentifiers, 'where ' +  this.questionSet.parent_relationship + '.identifier__c = \'' + this.getApplicationIdentifierParam() + '\'');
-        } else {
-            this.targetObject = Query.object(this.questionSet.target_object, fieldIdentifiers, 'where ' +  'identifier__c = \'' + targetIdentifier + '\'');            
-        }
-
-        // Manually handle our custom date fields
+        // Manually handle our custom date fields and multi-select fields
         for (COF_Field field : this.fields) {
             if (field.isDateField == true) {
                 Date currentDate = (Date) this.targetObject.get(field.identifier);
@@ -70,6 +74,17 @@ public class QuestionsController extends COF_PageController {
                     field.dateYear = String.valueOf(currentDate.year());
                 }
             }
+            if (field.isSelectField == true) {
+                String fieldValue = (String) this.targetObject.get(field.identifier);
+                if (fieldValue != null) {
+                    Set<String> valueSet = new Set<String>();
+                    valueSet.addAll(fieldValue.split(';'));
+                    for (COF_Field.CheckBoxOption opt: field.optionList) {
+                        if (valueSet.contains(opt.value)) opt.selected = true;
+                    }
+                }
+            }
+
         }
 
     }
@@ -78,13 +93,14 @@ public class QuestionsController extends COF_PageController {
         List<String> fields = new List<String>();
         fields.add(this.currentPage.children.target_field);
         fields.add('CreatedDate');
-        fields.add('identifier__c');
+        fields.add('Name');
         String appIdentifier = this.getApplicationIdentifierParam();
-        this.targetObjects = Query.objects(this.currentPage.children.target_object, fields, 'where application__r.identifier__c = \'' + appIdentifier + '\'order by CreatedDate asc');
+        system.debug('###this.targetObject: '+this.targetObject);
+        this.targetObjects = Query.objects(this.currentPage.children.target_object, fields, 'where full_application__r.Name = \'' + this.targetObject.get('Name') + '\'order by CreatedDate asc');
     }
 
     public void saveTargetObject() {
-        // Manually handle our custom date fields
+        // Manually handle our custom date fields and multiselect checkbox fields
         for (COF_Field field : this.fields) {
             if (field.isDateField == true) {
                 // Error - Should check all fields
@@ -92,6 +108,24 @@ public class QuestionsController extends COF_PageController {
                     Date datevalue = date.parse(field.dateDay + '/' + field.dateMonth + '/' + field.dateYear);
                     this.targetObject.put(field.identifier, datevalue);
                 }
+            }
+            if (field.isSelectField == true) {
+                //if (field.valueList != null && field.valueList.size() > 0) {
+                //    this.targetObject.put(field.identifier, String.join(field.valueList,';'));
+                //} else {
+                //    this.targetObject.put(field.identifier, null);
+                //}  
+                String valueString = null;
+                for (COF_Field.CheckBoxOption opt: field.optionList) {
+                    if (opt.selected) {
+                        if (valueString == null) {
+                            valueString = opt.value;
+                        } else {
+                            valueString += ';'+opt.value;
+                        }
+                    }                   
+                }
+                this.targetObject.put(field.identifier, valueString);
             }
         }
 
@@ -179,21 +213,25 @@ public class QuestionsController extends COF_PageController {
         if (this.currentPage.children.target_object == 'Form_LCF_Outcome_1__c') {
             newChild = new Form_LCF_Outcome_1__c();
         }
+        if (this.currentPage.children.target_object == 'Form_LCF_Commissioner_1__c') {
+            newChild = new Form_LCF_Commissioner_1__c();
+        }
 
-        // Set the parent application and save
+        // Set the parent application and form and save
         newChild.put('application__c', application.Id);
+        newChild.put('full_application__c', this.targetObject.get('Id'));
         Database.SaveResult result = Database.insert(newChild);
         if (result.isSuccess() == true) {
             System.Debug(result);
             List<String> fieldIdentifiers = new List<String>();
-            fieldIdentifiers.add('identifier__c');
+            fieldIdentifiers.add('Name');
             SObject childFetched = Query.object(this.currentPage.children.target_object, fieldIdentifiers, 'where ' +  'id = \'' + result.getId() + '\'');
 
             PageReference nextPage = Page.questions;
             nextPage.getParameters().put('form', this.getFormIdentifierParam());
             nextPage.getParameters().put('app', this.getApplicationIdentifierParam());
             nextPage.getParameters().put('section', this.currentPage.children.section);
-            nextPage.getParameters().put('id', (String)childFetched.get('identifier__c'));
+            nextPage.getParameters().put('id', (String)childFetched.get('Name'));
             nextPage.getParameters().put('page', '1');
             String completion = '/apex/questions?app=' + this.getApplicationIdentifierParam();
             completion += '&form=' + this.getFormIdentifierParam();

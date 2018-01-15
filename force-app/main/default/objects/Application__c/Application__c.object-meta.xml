@@ -55,8 +55,9 @@
     <externalSharingModel>ReadWrite</externalSharingModel>
     <label>Application</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>APP-{00000}</displayFormat>
+        <label>Application ID</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Applications</pluralLabel>
     <searchLayouts/>

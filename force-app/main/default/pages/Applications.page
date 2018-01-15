@@ -37,7 +37,7 @@
 							<apex:repeat value="{!applications}" var="application">
 								<tr>
 									<th scope="row" class="app-identifier">
-										{!application['theme__c']} ({!application['identifier__c']})
+										{!application['theme__c']} ({!application['Name']})
 									</th>
 									<td class="form-identifier">Financial health and fraud prevention</td>
 									<td class="numeric"><span class="status">SUBMITTED</span></td>
@@ -55,10 +55,10 @@
 								<tr>
 									<th scope="row">&nbsp;</th>
 									<td class="form-identifier">
-										<apex:outputLink value="{!$Page.sections}">
+										<apex:outputLink value="{!$Page.Sections}">
 										    Full application
 										    <apex:param name="form" value="lcf_full_app_1"/>
-										    <apex:param name="app" value="{!application['identifier__c']}"/>
+										    <apex:param name="app" value="{!application['Name']}"/>
 										</apex:outputLink>
 									</td>
 									<td class="numeric"></td>

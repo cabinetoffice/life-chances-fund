@@ -5,6 +5,11 @@
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Service</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>AnswersController</apexClass>
         <enabled>true</enabled>
@@ -115,13 +120,13 @@
     </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Application__c.identifier__c</field>
+        <editable>true</editable>
+        <field>Application__c.theme__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Application__c.theme__c</field>
+        <field>Form_LCF_Commissioner_1__c.application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -132,11 +137,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Form_LCF_Commissioner_1__c.co_email__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Form_LCF_Commissioner_1__c.co_full_application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -155,8 +155,8 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Form_LCF_Commissioner_1__c.identifier__c</field>
+        <editable>true</editable>
+        <field>Form_LCF_Commissioner_1__c.full_application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -365,11 +365,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Form_LCF_Full_App_1__c.identifier__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>Form_LCF_Full_App_1__c.iv_interventions_additional__c</field>
         <readable>true</readable>
@@ -397,11 +392,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Form_LCF_Full_App_1__c.ou_justification__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Form_LCF_Full_App_1__c.ou_outcomes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -570,8 +560,8 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Form_LCF_Outcome_1__c.identifier__c</field>
+        <editable>true</editable>
+        <field>Form_LCF_Outcome_1__c.full_application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -582,11 +572,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Form_LCF_Outcome_1__c.ou_description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Form_LCF_Outcome_1__c.ou_full_application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

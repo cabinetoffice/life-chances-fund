@@ -56,7 +56,7 @@ public class AnswersController extends COF_PageController {
 
         // Fetch the target object
         List<String> requiredFieldIdentifiersArray = new List<String>(requiredFieldIdentifiers);
-        this.targetObject = Query.object('Form_LCF_Full_App_1__c', requiredFieldIdentifiersArray, 'where ' +  'application__r.identifier__c = \'' + this.getApplicationIdentifierParam() + '\'');
+        this.targetObject = Query.object('Form_LCF_Full_App_1__c', requiredFieldIdentifiersArray, 'where ' +  'Application__r.Name = \'' + this.getApplicationIdentifierParam() + '\'');
     }
 
 }

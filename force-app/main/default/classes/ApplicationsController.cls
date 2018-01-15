@@ -12,8 +12,8 @@ public class ApplicationsController extends COF_PageController {
 
 			// Get the application
 	        List<String> fields = new List<String>();
-	        fields.add('identifier__c');
-	        fields.add('theme__c');
+	        fields.add('Name');
+	        fields.add('Theme__c');
 	        this.applications = Query.objects('Application__c', fields, '');
 	        // throw exception
 	        System.debug(this.applications);

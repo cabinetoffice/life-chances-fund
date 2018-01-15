@@ -4,12 +4,12 @@
         <apex:define name="breadcrumbs">
             <div class="breadcrumbs">
                 <ol>
-                    <li><apex:outputLink value="{!$Page.applications}">Applications</apex:outputLink></li>
+                    <li><apex:outputLink value="{!$Page.Applications}">Applications</apex:outputLink></li>
                     <li>
-                        <apex:outputLink value="{!$Page.sections}">
+                        <apex:outputLink value="{!$Page.Sections}">
                             {!form.title}
                             <apex:param name="form" value="{!form.id}"/>
-                            <apex:param name="app" value="{!application['identifier__c']}"/>
+                            <apex:param name="app" value="{!application['Name']}"/>
                         </apex:outputLink>
                     </li>
                     <li aria-current="page">{!section.title}</li>
@@ -39,12 +39,12 @@
                                         <th class="question" valign="top">{!field.label}</th>
                                         <td valign="top">{!targetObject[field.identifier]}</td>
                                         <td class="numeric" valign="top">
-                                            <apex:outputLink value="{!$Page.questions}">
+                                            <apex:outputLink value="{!$Page.Questions}">
                                                 Change
                                                 <apex:param name="page" value="{!validPage.id}"/>
                                                 <apex:param name="form" value="{!form.id}"/>
                                                 <apex:param name="section" value="{!section.id}"/>
-                                                <apex:param name="app" value="{!application['identifier__c']}"/>
+                                                <apex:param name="app" value="{!application['Name']}"/>
                                             </apex:outputLink>
                                         </td>
                                     </tr>
@@ -68,7 +68,7 @@
 
             <br />
 
-            <apex:form>
+            <apex:form >
                 <apex:commandButton value="Mark section as complete and continue" action="{!complete}" styleClass="button" disabled="true" html-aria-disabled="true" />
                 <br /><br />
                 <apex:commandLink value="Save and come back later" action="{!saveExit}" />

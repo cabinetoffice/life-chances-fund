@@ -6,8 +6,8 @@ The application presents a number of forms to applicants, and manages complex qu
 
 ## Deployment
 
-* [Enable Dev Hub in your Salesforce org](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_enable_devhub.htm)
-* [Install sfdx-cli](https://developer.salesforce.com/tools/sfdxcli)
+* [Enable Dev Hub in your Salesforce org|https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_enable_devhub.htm]
+* [Install sfdx-cli|https://developer.salesforce.com/tools/sfdxcli]
 * Checkout this source and cd into directory
 * Authenticate e.g. 'sfdx force:auth:web:login'
 * Create a new scratch org e.g. 'sfdx force:org:create -f config/project-scratch-def.json -a lcf2'

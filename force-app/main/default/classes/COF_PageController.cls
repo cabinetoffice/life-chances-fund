@@ -11,10 +11,10 @@ public virtual class COF_PageController {
 	 */
 	public virtual SObject getApplication() {
         List<String> fields = new List<String>();
-        fields.add('identifier__c');
-        fields.add('theme__c');
+        fields.add('Name');
+        fields.add('Theme__c');
         // need to ensure this respects permissions - only the owner of an application should be able to access it
-        return Query.object('Application__c', fields, 'where identifier__c = \'' + this.getApplicationIdentifierParam() + '\'');
+        return Query.object('Application__c', fields, 'where Name = \'' + this.getApplicationIdentifierParam() + '\'');
         // throw exception if no matches
 	}
 

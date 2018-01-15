@@ -71,7 +71,7 @@ public class SummaryController extends COF_PageController {
 
         // Fetch the target object
         List<String> requiredFieldIdentifiersArray = new List<String>(requiredFieldIdentifiers);
-        this.targetObject = Query.object(this.questionSet.target_object, requiredFieldIdentifiersArray, 'where ' +  this.questionSet.parent_relationship + '.identifier__c = \'' + this.getApplicationIdentifierParam() + '\'');
+        this.targetObject = Query.object(this.questionSet.target_object, requiredFieldIdentifiersArray, 'where ' +  this.questionSet.parent_relationship + '.Name = \'' + this.getApplicationIdentifierParam() + '\'');
     }
 
     public PageReference complete() {
